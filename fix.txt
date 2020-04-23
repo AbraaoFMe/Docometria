@@ -1,0 +1,9 @@
+Erros e/ou Problemas Fixados do Projeto
+13/11/2019 --> [Fix] Erro na tabela final no comprimento e largura da padiola
+13/11/2019 --> [Fix] Unidade de medida da altura da padiola
+13/11/2019 --> [Fix] Erro na tabela final na quantidade de padiolas do AG 1
+26/11/2019 --> [Fix] Informações de grande importância para o usuário
+26/11/2019 --> [Fix] Remodelagem das etapas referente ao conteúdo de padiolas
+26/11/2019 --> [Fix] Código gráfico alterado para melhor desempenho
+26/11/2019 --> [Fix] Limitação de casas decimais nas etapas necessárias
+26/11/2019 --> [Fix] Ligações entre váriaveis no código JavaScript

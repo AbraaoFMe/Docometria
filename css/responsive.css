@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* Documento CSS por Vinicius Freitas */
+
+@media only screen and (max-width: 980px) {
+body {
+	background-image: none;
+	background-color: rgba(210, 218, 226,1.0);
+}
+.header {
+	height: 220px;
+	background: #7263BA;
+}
+.seta:before {
+    position: relative;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: -7.000em;
+    left: 50%;
+    z-index: 1;
+    align-content: center;
+    border-left: 5.500em solid transparent;
+    border-right: 5.500em solid transparent;
+    border-top: 6.000em solid #7263BA;
+}
+.res {
+	background-image: url(../img/logo2.png);
+	height: 205px;
+    background-repeat: no-repeat;
+	font-size: 0px;
+	margin-left: 1.5%;
+	color: transparent;
+	text-shadow: none;
+}
+.icon {
+	opacity: 0;
+}
+.seta {
+	margin-top: -2px;
+}
+.container-calc {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 900px;
+}
+.button-calc {
+    background-color: transparent;
+    border: 1px solid rgba(30, 39, 46,1.0);
+    color: rgba(30, 39, 46,1.0);
+    font-family: "segoe ui light";
+    font-weight: bold;
+    padding-left: 20px;
+    margin-left: 4px;
+    margin-top: 10px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 50px;
+    opacity: 0.8;
+    transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+    outline: 0;
+}
+.button-calc:hover {
+    opacity: 0.8;
+}
+.container-box-dos {
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 640px;
+}
+.box-dos {
+    font-family: "Segoe ui light";
+    font-size: 18px;
+    background: rgba(41, 46, 73, 0.8);  /* fallback for old browsers */
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    margin-bottom: 9px;
+    margin-left: 15px;
+    margin-top: 20px;
+    width: 600px;
+    position: relative;
+    text-align: justify;
+    float: left;
+    color: rgba(233, 228, 240, 0.8);
+    text-shadow: 0 2px rgba(0,0,0,0.18);
+}
+.icon-2 {
+    background-image: none;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    background-size: 0%;
+    opacity: 0;
+}
+.info {
+	opacity: 0;
+}
+.footer {
+    opacity: 0;
+}
+.creditos {
+    opacity: 0;
+}
+.iniciacao {
+    opacity: 0;
+}
+.instagram {
+	opacity: 0;
+}
+.instagram-text {
+	opacity: 0;
+}
+.tree {
+	font-size: 40px;
+}
+}
