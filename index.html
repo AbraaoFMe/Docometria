@@ -1,1144 +1,1678 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="utf-8">
-<title>Iniciação Científica</title>
-<link rel="icon" href="math.ico" type="image/x-icon"/>
-<link href="font/font.css" rel="stylesheet" type="text/css" />
-<link href="css/site.css" rel="stylesheet" type="text/css" />
-<link href="css/responsive.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,700">
-<script type="text/javascript" src="js/granulometria.js"></script>
-<script type="text/javascript" src="js/empirico.js"></script>
-<script type="text/javascript" src="js/experimental.js"></script>
-<script>
-function ConsisteNumerico(tam, fld, e) {
-    var key = '';
-    var i = 0;
-    var len = 0;
-    var strCheck = '0123456789.'; // Permitidos
-    var aux = '';
-    var whichCode = (window.Event) ? e.which : e.keyCode;
-    if (whichCode == 18 || whichCode == 8 || whichCode == 0)
-        return true;  // Enter
-    key = String.fromCharCode(whichCode);
-    if (strCheck.indexOf(key) == -1)
-        return false;
-    len = tam -1;
-    aux = '';
-    for(; i < len; i++)
-        if (strCheck.indexOf(fld.value.charAt(i))!=-1)
-            aux += fld.value.charAt(i);
-    aux += key;
-    fld.value = '';
-    fld.value += aux;
-    return false;
-}
-</script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciação Científica</title>
+
+    <link rel="icon" href="math.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+        integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,700">
+
+    <link href="font/font.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/site.css" rel="stylesheet" type="text/css" />
+    <link href="css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="js/granulometria.js"></script>
+    <script type="text/javascript" src="js/empirico.js"></script>
+    <script type="text/javascript" src="js/experimental.js"></script>
+
+    <script>
+        function ConsisteNumerico(tam, fld, e) {
+            var key = '';
+            var i = 0;
+            var len = 0;
+            var strCheck = '0123456789.'; // Permitidos
+            var aux = '';
+            var whichCode = (window.Event) ? e.which : e.keyCode;
+            if (whichCode == 18 || whichCode == 8 || whichCode == 0)
+                return true;  // Enter
+            key = String.fromCharCode(whichCode);
+            if (strCheck.indexOf(key) == -1)
+                return false;
+            len = tam - 1;
+            aux = '';
+            for (; i < len; i++)
+                if (strCheck.indexOf(fld.value.charAt(i)) != -1)
+                    aux += fld.value.charAt(i);
+            aux += key;
+            fld.value = '';
+            fld.value += aux;
+            return false;
+        }
+    </script>
+
 </head>
+
 <body>
-<div class="container">
-    <div class="header">
-      <div class="text res">Iniciação Científica desenvolvida por <i>Vinícius Freitas</i>, <i>Alexander Rezende</i> e <i>Abraão Medeiros</i>.</br>Agradecimentos especiais a todos que colaboraram no desenvolvimento do projeto.</div>
-    </div>
-      <div class="icon"></div>
-    <div class="seta"></div>
-</div>
-<a href="#info"><div class="info"><i class="fas fa-info-circle"></i></div></div>
-<div class="container-calc">
-<a href="#dosagem"><input type="submit" class="button-calc" value="Dosagem do Concreto"></input>
-  <div id="dosagem" class="modalDialog dosagem-box">
-  <div>
-  <!-- Utilidades -->
-  <a href="#close" title="Fechar" class="close-dosagem">×</a>
-  <!-- Fim utilidades -->
-  <b>Escolha o método a ser estudado</b>
-  <a href="#empirico" title="Conferir os procedimentos de cálculo" class="empirico">Método Empírico <i class="fas fa-check-circle"></i><a>
-  <a href="#experimental" title="Conferir os procedimentos de cálculo" class="experimental">Método Experimental <i class="fas fa-check-circle"></i></a>
-</div>
-</div>
-</a>
-<div id="mf" class="modalDialog procedimentos-box">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<a href="#granulometria" title="Voltar à tabela granulometrica" class="passos">Tabela Granulometrica <i class="fas fa-check-circle"></i></a>
-<h6><b>A tabela de granulometria foi desenvolvida com base na NBR 7217 (ABNT, 1987).</b></h6>
-<div class="etapas doze">
-  <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo explicar como é calculado o Módulo de Finura <strong>(MF)</strong> e sua utilização.</p>
-</div>
-<h3><b>O módulo de finura é calculado pela soma das percentagens cumulativas mantidas em peneiras padrão e dividindo a soma por 100. Mudanças significativas no tamanho de grãos de areia têm uma importante demanda de água e, portanto, o impacto que a trabalhabilidade, de modo que se há uma variação significativa na dimensão do grão de areia deve ser ajustamentos ao teor de cimento e água para manter a resistência do concreto.</br>Valores de MF de 2,50-3 são normais para agregados finos. Os valores de MF de agregados grossos vai depender do tamanho máximo do agregado.</b></h3>
-</div>
-</div>
-<div id="pgranulometria" class="modalDialog procedimentos-box">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<a href="#granulometria" title="Voltar à tabela granulometrica" class="passos">Tabela Granulometrica <i class="fas fa-check-circle"></i></a>
-<h6><b>A tabela de granulometria foi desenvolvida com base na NBR 7217 (ABNT, 1987).</b></h6>
-<div class="etapas onze">
-  <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de tem como objetivo explicar da melhor forma possível a finalidade e como utilizar a tabela de granulometria, que tem como objetivo determinar a composição granulometrica de agregados miúdos e graúdos para o concreto.</p>
-</div>
-<h3><b>Após determinada a massa, de acordo com a NBR 7217 (ABNT, 1987), deve-se colocar a amostra no conjunto de peneira e promover a agitação mecânica se possível.
-O agregado retido em cada peneira deve ser levado para a balança, a fim de determinar a massa retida em cada peneira.</b></br></br>Preencher a tabela <font size="3"><i class="fas fa-angle-double-right"></i></font> ao obter a massa retida em cada peneira, deve se preencher a tabela com os valores. Isso irá gerar de forma imediata a massa acumulada e a porcentagem acumulada, que serão utilizadas para determinatar o Módulo de Finura (MF) e Dimensão Máxima Característica (DMC).</h3>
-</div>
-</div>
-<a href="#granulometria"><input type="submit" class="button-calc" value="Tabela Granulometrica"></input>
-<div id="granulometria" class="modalDialog granulometria-box">
-<div>
-  <!-- Utilidades -->
-    <a href="#close" title="Fechar" class="close-dosagem">×</a>
-    <a href="#pgranulometria" title="Conferir os procedimentos de cálculo" class="passos">Procedimentos <i class="fas fa-check-circle"></i></a>
-  
-  <!-- Fim utilidades -->
-    <h6><b>TABELA GRANULOMETRIA //</b> 1ª & 2ª determinação</h6>
+    <div class="container">
 
-    <!-- Peneiras e preencher dados -->
-    <div class="tabela">
-      <div class="peneiras">Peneiras <b>(mm)</b></br><b>76</b></br>64</br>50</br><b>38</b></br>32</br>25</br><b>19</b></br>12,5</br><b>9,5</b></br>6,3</br><b>4,8</br>2,4</br>1,2</br>0,6</br>0,3</br>0,15</b></br>Fundo < 0,15</br>Total »</div>
-<form name="massa">
-  Massa <b>(g)</b></br>
-<input name="campo1" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo2" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo3" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo4" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo5" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo6" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo7" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo8" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo9" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo10" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo11" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo12" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo13" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo14" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo15" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo16" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo17" class="dados" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="resultado" class="dados" readonly><br>
-<input type="button" onclick="granulometria()" value="Calcular" class="calcular">
-</form>
-  </div>
+        <!-- Header -->
+        <div class="header">
+            <div class="text res">Iniciação Científica desenvolvida por <i>Vinícius Freitas</i>, <i>Alexander
+                    Rezende</i> e
+                <i>Abraão Medeiros</i>.</br>Agradecimentos especiais a todos que colaboraram no desenvolvimento do
+                projeto.
+            </div>
+        </div>
 
-  <!-- Resultado da massa acumulada -->
-  <div class="acumulada-position">
-<form name="acumulada">
-  <text title="Massa Acumulada">Acum. <b>(g)</b></text></br>
-<input name="campo1" class="acumulada" readonly><br>
-<input name="campo2" class="acumulada" readonly><br>
-<input name="campo3" class="acumulada" readonly><br>
-<input name="campo4" class="acumulada" readonly><br>
-<input name="campo5" class="acumulada" readonly><br>
-<input name="campo6" class="acumulada" readonly><br>
-<input name="campo7" class="acumulada" readonly><br>
-<input name="campo8" class="acumulada" readonly><br>
-<input name="campo9" class="acumulada" readonly><br>
-<input name="campo10" class="acumulada" readonly><br>
-<input name="campo11" class="acumulada" readonly><br>
-<input name="campo12" class="acumulada" readonly><br>
-<input name="campo13" class="acumulada" readonly><br>
-<input name="campo14" class="acumulada" readonly><br>
-<input name="campo15" class="acumulada" readonly><br>
-<input name="campo16" class="acumulada" readonly><br>
-<input name="campo17" class="acumulada" readonly><br>
-</form>
-  </div>
+        <div class="icon"></div>
+        <div class="seta"></div>
 
-  <!-- Resultado da % de massa acumulada -->
-  <div class="porcen-acumulada-position">
-<form name="porcenAcumulada">
-  <text title="% de Massa Acumulada">Massa acum. <b>(%)</b></text></br>
-<input name="campo1" class="porcen-acumulada" readonly><br>
-<input name="campo2" class="porcen-acumulada" readonly><br>
-<input name="campo3" class="porcen-acumulada" readonly><br>
-<input name="campo4" class="porcen-acumulada" readonly><br>
-<input name="campo5" class="porcen-acumulada" readonly><br>
-<input name="campo6" class="porcen-acumulada" readonly><br>
-<input name="campo7" class="porcen-acumulada" readonly><br>
-<input name="campo8" class="porcen-acumulada" readonly><br>
-<input name="campo9" class="porcen-acumulada" readonly><br>
-<input name="campo10" class="porcen-acumulada" readonly><br>
-<input name="campo11" class="porcen-acumulada" readonly><br>
-<input name="campo12" class="porcen-acumulada" readonly><br>
-<input name="campo13" class="porcen-acumulada" readonly><br>
-<input name="campo14" class="porcen-acumulada" readonly><br>
-<input name="campo15" class="porcen-acumulada" readonly><br>
-<input name="campo16" class="porcen-acumulada" readonly><br>
-<input name="campo17" class="porcen-acumulada" readonly><br>
-</form>
-  </div>
-
-    <!-- 2° det. Preencher dados -->
-        <div class="det-massa-position">
-<form name="detMassa">
-    Massa <b>(g)</b></br>
-<input name="campo1" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo2" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo3" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo4" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo5" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo6" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo7" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo8" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo9" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo10" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo11" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo12" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo13" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo14" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo15" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo16" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="campo17" class="det-massa" onKeyPress="return(ConsisteNumerico('10',this,event))" placeholder="INSIRA SEUS DADOS"><br>
-<input name="resultado" class="det-massa" readonly><br>
-</form>
     </div>
 
-    <!-- 2° det. Massa acumulada -->
-        <div class="detAcumulada-position">
-<form name="detAcumulada">
-    <text title="Massa Acumulada">Acum. <b>(g)</b></text></br>
-<input name="campo1" class="detAcumulada" readonly><br>
-<input name="campo2" class="detAcumulada" readonly><br>
-<input name="campo3" class="detAcumulada" readonly><br>
-<input name="campo4" class="detAcumulada" readonly><br>
-<input name="campo5" class="detAcumulada" readonly><br>
-<input name="campo6" class="detAcumulada" readonly><br>
-<input name="campo7" class="detAcumulada" readonly><br>
-<input name="campo8" class="detAcumulada" readonly><br>
-<input name="campo9" class="detAcumulada" readonly><br>
-<input name="campo10" class="detAcumulada" readonly><br>
-<input name="campo11" class="detAcumulada" readonly><br>
-<input name="campo12" class="detAcumulada" readonly><br>
-<input name="campo13" class="detAcumulada" readonly><br>
-<input name="campo14" class="detAcumulada" readonly><br>
-<input name="campo15" class="detAcumulada" readonly><br>
-<input name="campo16" class="detAcumulada" readonly><br>
-<input name="campo17" class="detAcumulada" readonly><br>
-</form>
-    </div>
+    <a href="#info">
+        <div class="info"><i class="fas fa-info-circle"></i></div>
+        </div>
+        
+        <div class="container-calc">
+            <a href="#dosagem"><input type="submit" class="button-calc" value="Dosagem do Concreto"></input>
+                <div id="dosagem" class="modalDialog dosagem-box">
+                    <div>
+                        <!-- Utilidades -->
+                        <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                        <!-- Fim utilidades -->
+                        <b>Escolha o método a ser estudado</b>
+                        <a href="#empirico" title="Conferir os procedimentos de cálculo" class="empirico">Método
+                            Empírico <i class="fas fa-check-circle"></i><a>
+                                <a href="#experimental" title="Conferir os procedimentos de cálculo"
+                                    class="experimental">Método
+                                    Experimental <i class="fas fa-check-circle"></i></a>
+                    </div>
+                </div>
+            </a>
 
-    <!-- 2° det. Resultado da % de massa acumulada -->
-    <div class="detporcen-acumulada-position">
-<form name="detporcenAcumulada">
-    <text title="% de Massa Acumulada">Massa acum. <b>(%)</b></text></br>
-<input name="campo1" class="detporcen-acumulada" readonly><br>
-<input name="campo2" class="detporcen-acumulada" readonly><br>
-<input name="campo3" class="detporcen-acumulada" readonly><br>
-<input name="campo4" class="detporcen-acumulada" readonly><br>
-<input name="campo5" class="detporcen-acumulada" readonly><br>
-<input name="campo6" class="detporcen-acumulada" readonly><br>
-<input name="campo7" class="detporcen-acumulada" readonly><br>
-<input name="campo8" class="detporcen-acumulada" readonly><br>
-<input name="campo9" class="detporcen-acumulada" readonly><br>
-<input name="campo10" class="detporcen-acumulada" readonly><br>
-<input name="campo11" class="detporcen-acumulada" readonly><br>
-<input name="campo12" class="detporcen-acumulada" readonly><br>
-<input name="campo13" class="detporcen-acumulada" readonly><br>
-<input name="campo14" class="detporcen-acumulada" readonly><br>
-<input name="campo15" class="detporcen-acumulada" readonly><br>
-<input name="campo16" class="detporcen-acumulada" readonly><br>
-<input name="campo17" class="detporcen-acumulada" readonly><br>
-</form>
-    </div>
+            <div id="mf" class="modalDialog procedimentos-box">
+                <div>
+                    <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                    <a href="#granulometria" title="Voltar à tabela granulometrica" class="passos">Tabela Granulometrica
+                        <i class="fas fa-check-circle"></i></a>
+                    <h6><b>A tabela de granulometria foi desenvolvida com base na NBR 7217 (ABNT, 1987).</b></h6>
+                    <div class="etapas doze">
+                        <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo
+                            explicar
+                            como é calculado o Módulo de Finura <strong>(MF)</strong> e sua utilização.</p>
+                    </div>
+                    <h3><b>O módulo de finura é calculado pela soma das percentagens cumulativas mantidas em peneiras
+                            padrão e
+                            dividindo a soma por 100. Mudanças significativas no tamanho de grãos de areia têm uma
+                            importante demanda
+                            de água e, portanto, o impacto que a trabalhabilidade, de modo que se há uma variação
+                            significativa na
+                            dimensão do grão de areia deve ser ajustamentos ao teor de cimento e água para manter a
+                            resistência do
+                            concreto.</br>Valores de MF de 2,50-3 são normais para agregados finos. Os valores de MF de
+                            agregados
+                            grossos vai depender do tamanho máximo do agregado.</b></h3>
+                </div>
+            </div>
 
-    <!-- Porcentagem Acum. Média -->
-        <div class="porcen-media-position">
-<form name="porcenMedia">
-    <text title="Média das Massas Acumuladas em %">Acum. Média <b>(%)</b></text></br>
-<input name="campo1" class="porcen-media" readonly><br>
-<input name="campo2" class="porcen-media" readonly><br>
-<input name="campo3" class="porcen-media" readonly><br>
-<input name="campo4" class="porcen-media" readonly><br>
-<input name="campo5" class="porcen-media" readonly><br>
-<input name="campo6" class="porcen-media" readonly><br>
-<input name="campo7" class="porcen-media" readonly><br>
-<input name="campo8" class="porcen-media" readonly><br>
-<input name="campo9" class="porcen-media" readonly><br>
-<input name="campo10" class="porcen-media" readonly><br>
-<input name="campo11" class="porcen-media" readonly><br>
-<input name="campo12" class="porcen-media" readonly><br>
-<input name="campo13" class="porcen-media" readonly><br>
-<input name="campo14" class="porcen-media" readonly><br>
-<input name="campo15" class="porcen-media" readonly><br>
-<input name="campo16" class="porcen-media" readonly><br>
-<input name="campo17" class="porcen-media" readonly><br>
-</form>
-    </div>
+            <div id="pgranulometria" class="modalDialog procedimentos-box">
+                <div>
+                    <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                    <a href="#granulometria" title="Voltar à tabela granulometrica" class="passos">Tabela Granulometrica
+                        <i class="fas fa-check-circle"></i></a>
+                    <h6><b>A tabela de granulometria foi desenvolvida com base na NBR 7217 (ABNT, 1987).</b></h6>
+                    <div class="etapas onze">
+                        <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de tem como objetivo explicar da
+                            melhor forma
+                            possível a finalidade e como utilizar a tabela de granulometria, que tem como objetivo
+                            determinar a
+                            composição granulometrica de agregados miúdos e graúdos para o concreto.</p>
+                    </div>
+                    <h3><b>Após determinada a massa, de acordo com a NBR 7217 (ABNT, 1987), deve-se colocar a amostra no
+                            conjunto
+                            de peneira e promover a agitação mecânica se possível.
+                            O agregado retido em cada peneira deve ser levado para a balança, a fim de determinar a
+                            massa retida em
+                            cada peneira.</b></br></br>Preencher a tabela <font size="3"><i
+                                class="fas fa-angle-double-right"></i>
+                        </font> ao obter a massa retida em cada peneira, deve se preencher a tabela com os valores. Isso
+                        irá gerar
+                        de forma imediata a massa acumulada e a porcentagem acumulada, que serão utilizadas para
+                        determinatar o
+                        Módulo de Finura (MF) e Dimensão Máxima Característica (DMC).</h3>
+                </div>
+            </div>
 
-    <!-- Finish - Módulo de Finura -->
-    <div class="mf-position">
-<form name="mff">
-<b>Módulo de Finura <a href="#mf"><i class="fas fa-info-circle"></i></a></b></br>
-<input name="modulo" class="porcen-media" readonly>
-</form>
-    </div>
-</div>
-</div>
-</a>
-</div>
-<div class="footer">
-<div class="creditos"><i>Vinícius F.</i> <i class="fas fa-code"></i></div>
-<div class="iniciacao"></div>
-<div class="instagram">
-<div class="instagram-text"><a href="http://www.instagram.com/vinicfreitass" target="_blank"><font color="#bfe6ba">@</font>vinicfreitass</a></br><a href="http://www.instagram.com/alexander_rezende31" target="_blank"><font color="#bfe6ba">@</font>alexander_rezende31</a></br><a href="http://www.instagram.com/abraaofmedeiros" target="_blank"><font color="#bfe6ba">@</font>abraaofmedeiros</a></div>
-</div>
-</div>
-<div class="container-box-dos">
-<div class="box-dos">
-  <div class="icon-2"></div>
-  <center><h4><div class="tree">DOSAGEM DO CONCRETO</div></h4></center>
-  <h5>O traço pode ser dado por uma relação entre pesos: quilos, toneladas, libras etc. Apesar de melhor representar a dosagem, o traço em peso é mais difícil de realizar-se na prática.</br>
-  Em estruturas de grande porte e responsabilidade, o calculista indica o traço de concreto considerado em seus cálculos, o qual deve evidentemente ser respeitado. Pode ser diferente do indicado no nosso quadro: aqui porém fornecemos os traços normais para estruturas comuns e para o chamado concreto empírico, que é dosado e preparado com cuidados normais.</h5>
-</div>
-<div class="box-dos cor">
-  <div class="icon-2"></div>
-  <center><h4><div class="tree">ENSAIO DE GRANULOMETRIA</div></h4></center>
-  <h5>
-  A descrição quantitativa da textura de um solo é feita através da sua granulometria, ou seja, das dimensões de seus grãos e da distribuição percentual dos grãos, em peso, em intervalos de dimensões arbitradas por métodos de classificação de solos. Esses intervalos, denominados frações de solo, recebem designações especiais, para permitir a descrição dos solos segundo, exclusivamente, a sua granulometria. O tamanho das partículas que formam um solo é feita pela análise granulométrica. </h5>
-</div>
-</div>
-<div id="empirico" class="modalDialog empirico-box">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<div class="etapas y">
-<p><strong><i class="fas fa-bullhorn"></i></strong> Para saber quais dados são necessários para o processo de dosagem do concreto confira os nossos <strong>procedimentos</strong>!</p>
-</div>
-<a href="#procedimentosemp" title="Conferir os procedimentos de cálculo" class="procedimentos-dosagem">Procedimentos <i class="fas fa-check-circle"></i></a>
-<a href="#dosagem" title="Voltar aos métodos de dosagem" class="voltar"><i class="fas fa-angle-double-left"></i> Voltar</a>
-</br></br>
-<center>Dosagem Empírica - Método ABCP</center></br>
-<div class="etapas">
-  <p><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação água/cimento.</p>
-</div>
-<div class="img-container">
-  <img id="myimage" class="abaco1" src="img/abaco1.png" width="492" height="367">
-  <div class="textoca"><font size="2.5">Curva de Abrams</font></div>
-</div>
-<form name="fatorAC">
-<font size="3">FCK <b>(MPa)</b></font> <input name="fck" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Sd <b>(MPa)</b></font> <input name="sd" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="fatorac()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="fc28" value="Fc28" class="fc28" readonly><br>
-<font size="3">Fator A/C </font> <input name="" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-</form></br></br></br></br></br></br></br></br></br>
-<div class="etapas dois">
-  <p><strong>2º Etapa!</strong> Determinar a quantidade de água por meio da relação água/cimento.</p>
-</div>
-<form name="detAgua">
-<font size="3">Fator A/C </font> <input name="ac" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Peso do cimento <b>(kg)</b></font> <input name="pc" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="detagua()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="pag" value="Quant. de água" class="pag" readonly><br></br>
-</form>
-<div class="etapas tres">
-  <p><strong>3º Etapa!</strong> Determinar a quantidade total dos agregados.</p>
-</div>
-<div class="abaco2"><font size="2.5">Obs.: Essa tabela foi desenvolvida para agregados comuns (areia, brita), para
-seixo rolado tem que diminuir 1% de cada valor.</font></div>
-<form name="detPm">
-<font size="3">Água/materiais secos <b>(%)</b> </font> <input name="a" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="pag2" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Peso do cimento <b>(kg)</b></font> <input name="pc2" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="pesoagregados()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="pm" value="Peso dos agregados" class="pm" readonly><br>
-<font size="3">Agregados <b>(kg)</b></font> <input name="" class="emp20" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-</form></br>
-<div class="etapas quatro">
-  <p><strong>4º Etapa!</strong> Determinar a quantidade de areia e brita.</p>
-</div>
-<div class="abaco3"><font size="2.5">* Os valores constates da tabela referem-se a adensamento vibratório.</br>
-** Para adensamento, manual somar 4%.</font></div>
-<form name="quantAreia">
-<font size="3">Quantidade de areia <b>(%)</b></font> <input name="porcAreia" class="emp3" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Peso dos agregados <b>(kg)</b></font> <input name="pesoAgregados" class="emp3" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(%)</b></font> <input name="porcb1" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(%)</b></font> <input name="porcb2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="quantareiaa()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="pa" value="Quant. de areia" class="pa" readonly><br>
-<input name="brita" value="Quant. de AG" class="pa" readonly><div class="arrow"></div>
-<input name="b1" value="Quant. de agregado graúdo 1" class="b1" readonly>
-<input name="b2" value="Quant. de agregado graúdo 2" class="b2" readonly>
-<input name="pamudado" value="" class="painv" readonly>
-<input name="britamudado" value="" class="painv" readonly>
-</form>
-<div class="etapas cinco">
-  <p><strong>5º Etapa!</strong> Determinar o traço por kg de cimento.</p>
-</div>
-<form name="traco">
-<font size="3">Peso do cimento <b>(kg)</b> </font> <input name="tpc" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tar" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="tagua" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tag" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="tracor()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="trpc" class="t" readonly> <b>:</b>
-<input name="trar" class="t" readonly> <b>:</b>
-<input name="trag" class="t" readonly> <b>:</b>
-<input name="trag2" class="t" readonly> <b>:</b>
-<input name="tragua" class="t" readonly>
-<br></br>
-</form>
-<div class="etapas seis">
-  <p><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
-</div>
-<form name="tracoc">
-<font size="3">Umidade da areia <b>(%)</b> </font> <input name="w" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Peso do cimento <b>(kg)</b></font> <input name="tpcc" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tarc" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="taguac" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tagc" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2c" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="tracocr()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="trpcc" class="t" readonly> <b>:</b>
-<input name="trarc" class="t verde" readonly> <b>:</b>
-<input name="tragc" class="t" readonly> <b>:</b>
-<input name="trag2c" class="t" readonly> <b>:</b>
-<input name="traguac" class="t verde" readonly>
-<input name="testt" class="painv" readonly>
-<input name="testtt" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas sete">
-  <p><strong>7º Etapa!</strong> Volume de material por saco de cimento.</p>
-</div>
-<form name="volumepc">
-<font size="3">Inchamento da areia <b>(%)</b></font> <input name="i" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareia" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="mua" class="emp6" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="volumesc()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="vareiaseca" value="Volume da areia seca" class="t v1" readonly>
-<input name="vareiaumida" value="Volume da areia umida" class="t v2 verde" readonly>
-<input name="vag1" value="Volume do agregado graúdo 1" class="t v3 verde" readonly>
-<input name="vag2" value="Volume do agregado graúdo 2" class="t v3 verde" readonly>
-<input name="vareiasecat" class="painv" readonly></br></br>
-</form>
-<div class="etapas oito">
-  <p><strong>8º Etapa!</strong> Determinação das padiolas por saco de cimento.</p>
-</div>
-<form name="padiolas">
-<font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiola" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiola" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiola" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Volume da areia umida <b>(m³)</b></font> <input name="pvau" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Volume do agregado graúdo 1 <b>(m³)</b></font> <input name="pvag1" class="emp10" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Volume do agregado graúdo 2 <b>(m³)</b></font> <input name="pvag2" class="emp10" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="padiolasc()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="qpadiolasareia" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
-<input name="qpadiolaag1" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
-<input name="qpadiolaag2" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
-<input name="dimensaopadiola" class="painv" readonly>
-<input name="qpadiolasareiat" class="painv" readonly>
-<input name="pvag1t" class="painv" readonly>
-<input name="pvag2t" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas nove">
-  <p><strong>9º Etapa!</strong> Quantidade de material por m³.</p>
-</div>
-<form name="quantporm">
-<font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="mcubico" class="emp4 ff" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa específica do cimento <b>(kg/dm³)</b></font> <input name="mespc" class="emp4 cc" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa específica da areia <b>(kg/dm³)</b></font> <input name="mespa" class="emp4 aa" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa específica do agregado graúdo <b>(kg/dm³)</b></font> <input name="mespag" class="emp4 gg" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Traço por kg de cimento corrigido</font> 
-<input name="mtc" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mta" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtag1" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtag2" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtagua" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="quantpormetro()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="quantmc" value="Quantidade de cimento" class="t v2" readonly>
-<input name="quantma" value="Quantidade de areia" class="t v1" readonly>
-<input name="quantmag1" value="Quantidade de AG 1" class="t v1" readonly>
-<input name="quantmag2" value="Quantidade de AG 2" class="t v1" readonly>
-<input name="quantmagua" value="Quantidade de água" class="t v5" readonly>
-<input name="quantmct" class="painv" readonly>
-<input name="quantmctt" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas dez">
-  <p><strong>10º Etapa!</strong> Determinação das padiolas por m³.</p>
-</div>
-<form name="padiolasm3">
-<font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiolam3" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiolam3" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiolam3" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Inchamento da areia <b>(%)</b></font> <input name="im3" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Umidade da areia <b>(%)</b></font> <input name="um3" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentom3" class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiam3" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1m3" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2m3" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="laguam3" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muam3" class="emp6" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1m3" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2m3" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="padiolam()" value="Calcular" class="calcular"> <b>»</b>
-<input name="qsacocimentom3" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
-<input name="qpadiolasareiam3" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
-<input name="qpadiolaag1m3" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
-<input name="qpadiolaag2m3" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
-<input name="qaguam3" value="Quantidade de litro(s) de água" class="t v4" readonly>
-<input name="qsacocimentom3t" class="painv" readonly>
-<input name="qaguam3t" class="painv" readonly>
-<input name="qareiasecat" class="painv" readonly>
-<input name="vast" class="painv" readonly>
-<input name="vaht" class="painv" readonly>
-<input name="vpadiolam3" class="painv" readonly>
-<input name="padiolasm3areia" class="painv" readonly>
-<input name="padiolasm3areiat" class="painv" readonly>
-<input name="padiolasm3areiatt" class="painv" readonly>
-<input name="padiolasm3areiattt" class="painv" readonly>
-<input name="qpadiolaag1m3t" class="painv" readonly>
-<input name="qpadiolaag1m3tt" class="painv" readonly>
-<input name="qpadiolaag1m3ttt" class="painv" readonly>
-<input name="qpadiolaag1m3tttt" class="painv" readonly>
-<input name="qpadiolaag2m3t" class="painv" readonly>
-<input name="qpadiolaag2m3tt" class="painv" readonly>
-<input name="qpadiolaag2m3ttt" class="painv" readonly>
-<input name="qpadiolaag2m3tttt" class="painv" readonly>
-</form>
-<div class="etapas h">
-<p><strong><i class="fas fa-table"></i></strong> &nbsp;<strong>Tabela de Resultados</strong></p>
-</div></br>
-<div class="etapasj j j5"><strong>Quant. de material</br>por saco de</br>cimento (kg)</strong>
-</div>
-<div class="etapasj j j2">
-<strong>Traço do </br>concreto</strong>
-</div>
-<div class="etapasj j j6"><div class="corrigido cor1"><strong>* Corrigido</strong></div><strong>Quant. de material</br>por saco de</br>cimento (kg)</strong>
-</div>
-<div class="etapasj j j2"><div class="corrigido"><strong>* Corrigido</strong></div><strong>Traço do </br>concreto</strong>
-</div>
-<div class="etapasj j j3"><strong>Vol. para</br>1 saco de cimento (m³)</strong>
-</div>
-<div class="etapasj j j7"><strong>Padiolas para</br>1 saco de cimento (m³)</strong>
-</div>
-<div class="etapasj j j5"><strong>Quant. de material</br>para <font color="#6c5ce7">x</font> m³</br>de concreto (kg)</strong>
-</div>
-<div class="etapasj j j3"><strong>Vol. para</br> <font color="#6c5ce7">x</font> m³ de concreto (m³)</strong>
-</div>
-<div class="etapasj j j7"><strong>Padiolas para</br><font color="#6c5ce7">x</font> m³ de concreto (m³)</strong>
-</div>
-</br></br></br></br></br>
-<div class="table-text"><strong>Cimento</br>
-Areia</br>
-AG 1</br>
-AG 2</br>
-Água</strong></div>
-<form name="tabelasc">
-<input name="tabelascc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc5" value="-------------" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelascc6" value="---------------------------" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelascc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelascc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc9" value="" class="pag tabelaform3" readonly></br> 
+            <a href="#granulometria"><input type="submit" class="button-calc" value="Tabela Granulometrica"></input>
+                <div id="granulometria" class="modalDialog granulometria-box">
+                    <div>
+                        <!-- Utilidades -->
+                        <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                        <a href="#pgranulometria" title="Conferir os procedimentos de cálculo"
+                            class="passos">Procedimentos <i class="fas fa-check-circle"></i></a>
 
-<input name="tabelasccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccc9" value="" class="pag tabelaform3" readonly></br>
+                        <!-- Fim utilidades -->
+                        <h6><b>TABELA GRANULOMETRIA //</b> 1ª & 2ª determinação</h6>
 
-<input name="tabelascccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelascccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelascccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelascccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccc9" value="" class="pag tabelaform3" readonly></br>
+                        <!-- Peneiras e preencher dados -->
+                        <div class="tabela">
+                            <div class="peneiras">Peneiras
+                                <b>(mm)</b></br><b>76</b></br>64</br>50</br><b>38</b></br>32</br>25</br><b>19</b></br>12,5</br><b>9,5</b></br>6,3</br><b>4,8</br>2,4</br>1,2</br>0,6</br>0,3</br>0,15</b></br>Fundo
+                                < 0,15</br>Total »
+                            </div>
+                            <form name="massa">
+                                Massa <b>(g)</b></br>
+                                <input name="campo1" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo2" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo3" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo4" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo5" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo6" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo7" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo8" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo9" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo10" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo11" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo12" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo13" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo14" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo15" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo16" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo17" class="dados"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="resultado" class="dados" readonly><br>
+                                <input type="button" onclick="granulometria()" value="Calcular" class="calcular">
+                            </form>
+                        </div>
 
-<input name="tabelasccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasccccc9" value="" class="pag tabelaform3" readonly></br>
+                        <!-- Resultado da massa acumulada -->
+                        <div class="acumulada-position">
+                            <form name="acumulada">
+                                <text title="Massa Acumulada">Acum. <b>(g)</b></text></br>
+                                <input name="campo1" class="acumulada" readonly><br>
+                                <input name="campo2" class="acumulada" readonly><br>
+                                <input name="campo3" class="acumulada" readonly><br>
+                                <input name="campo4" class="acumulada" readonly><br>
+                                <input name="campo5" class="acumulada" readonly><br>
+                                <input name="campo6" class="acumulada" readonly><br>
+                                <input name="campo7" class="acumulada" readonly><br>
+                                <input name="campo8" class="acumulada" readonly><br>
+                                <input name="campo9" class="acumulada" readonly><br>
+                                <input name="campo10" class="acumulada" readonly><br>
+                                <input name="campo11" class="acumulada" readonly><br>
+                                <input name="campo12" class="acumulada" readonly><br>
+                                <input name="campo13" class="acumulada" readonly><br>
+                                <input name="campo14" class="acumulada" readonly><br>
+                                <input name="campo15" class="acumulada" readonly><br>
+                                <input name="campo16" class="acumulada" readonly><br>
+                                <input name="campo17" class="acumulada" readonly><br>
+                            </form>
+                        </div>
 
-<input name="tabelascccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelascccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelascccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelascccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascccccc9" value="" class="pag tabelaform3" readonly></br>
+                        <!-- Resultado da % de massa acumulada -->
+                        <div class="porcen-acumulada-position">
+                            <form name="porcenAcumulada">
+                                <text title="% de Massa Acumulada">Massa acum. <b>(%)</b></text></br>
+                                <input name="campo1" class="porcen-acumulada" readonly><br>
+                                <input name="campo2" class="porcen-acumulada" readonly><br>
+                                <input name="campo3" class="porcen-acumulada" readonly><br>
+                                <input name="campo4" class="porcen-acumulada" readonly><br>
+                                <input name="campo5" class="porcen-acumulada" readonly><br>
+                                <input name="campo6" class="porcen-acumulada" readonly><br>
+                                <input name="campo7" class="porcen-acumulada" readonly><br>
+                                <input name="campo8" class="porcen-acumulada" readonly><br>
+                                <input name="campo9" class="porcen-acumulada" readonly><br>
+                                <input name="campo10" class="porcen-acumulada" readonly><br>
+                                <input name="campo11" class="porcen-acumulada" readonly><br>
+                                <input name="campo12" class="porcen-acumulada" readonly><br>
+                                <input name="campo13" class="porcen-acumulada" readonly><br>
+                                <input name="campo14" class="porcen-acumulada" readonly><br>
+                                <input name="campo15" class="porcen-acumulada" readonly><br>
+                                <input name="campo16" class="porcen-acumulada" readonly><br>
+                                <input name="campo17" class="porcen-acumulada" readonly><br>
+                            </form>
+                        </div>
 
-<input type="button" onclick="tabela()" value="Calcular" class="calcular">
-</form>
-</div>
-</div>
-<div id="experimental" class="modalDialog experimental-box">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<div class="etapas y">
-<p><strong><i class="fas fa-bullhorn"></i></strong> Para saber quais dados são necessários para o processo de dosagem do concreto confira os nossos <strong>procedimentos</strong>!</p>
-</div>
-<a href="#procedimentosexp" title="Conferir os procedimentos de cálculo" class="procedimentos-dosagem">Procedimentos <i class="fas fa-check-circle"></i></a>
-<a href="#dosagem" title="Voltar aos métodos de dosagem" class="voltar"><i class="fas fa-angle-double-left"></i> Voltar</a>
-</br></br>
-<center>Dosagem Experimental - Método ABCP</center></br>
-<div class="etapas">
-  <p><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação água/cimento.</p>
-</div>
-<div class="img-container">
-  <img id="myimage" class="abaco1" src="img/abaco1.png" width="492" height="367">
-  <div class="textoca"><font size="2.5">Curva de Abrams</font></div>
-</div>
-<form name="exfatorAC">
-<font size="3">FCK <b>(MPa)</b></font> <input name="exfck" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Sd <b>(MPa)</b></font> <input name="exsd" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="exfatorac()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="exfc28" value="Fc28" class="fc28" readonly></br>
-<font size="3">Fator A/C </font> <input name="" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-</form></br></br></br></br></br></br></br></br></br>
-<div class="etapas dois">
-  <p><strong>2º Etapa!</strong> Calcular a quantidade de água e cimento em função da consistência e da dimensão máxima
-característica do agregado.</p>
-</div>
-<div class="abaco4"><font size="2.5">Consumo de água aproximado em litro por metro cúbico.</font></div>
-<form name="detCag">
-<font size="3">Fator A/C </font> <input name="acexp" class="emp" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Consumo de água <b>(l/m³)</b></font> <input name="cag" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub" class="emp4 mm" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="qcimento()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="qc" value="Quantidade de cimento" class="t v2" readonly> <input name="consaguaa" value="Consumo de água" class="t v2" readonly><br>
-<input name="qcc" class="painv" readonly>
-</form>
-<div class="etapas tres">
-  <p><strong>3º Etapa!</strong> Determinar a quantidade de agregado graúdo em função do módulo de finura e da dimensão máxima característica do agregado.</p>
-</div>
-<div class="abaco5"><font size="2.5">Volume compactado seco (Vc) do agregado graúdo por metro cúbico de concreto.</font></div>
-<form name="detQag">
-<font size="3">Massa unitária do agregado graúdo <b>(kg/m³)</b></font> <input name="mua" class="emp9" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub2" class="emp4 mm" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Volume compactado seco <b>(m³)</b> </font> <input name="vcs" class="emp6" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(%)</b> </font> <input name="qagexp" class="emp24" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(%)</b></font> <input name="qagexpp" class="emp24" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="qagexppp()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="qagg1" value="Quantidade de Agregado Graúdo 1" class="t v24" readonly> <input name="qagg2" value="Quantidade de Agregado Graúdo 2" class="t v24" readonly>
-<input name="qagg" class="painv" readonly>
-<input name="qaggg" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas quatro">
-  <p><strong>4º Etapa!</strong> Determinar a quantidade de areia.</p>
-</div>
-<form name="detAreia">
-<font size="3">Massa específica do cimento <b>(kg/m³)</b></font> <input name="mespc" class="emp4 tx" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa específica do AG <b>(kg/m³)</b></font> <input name="mespag" class="emp4 hg" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa específica da areia <b>(kg/m³)</b></font> <input name="mespareia" class="emp4 mm" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub3" class="emp4 mm" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qciment" class="emp6 tw" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1z" class="emp24" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b> </font> <input name="qag2z" class="emp24" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Consumo de água <b>(l)</b> </font> <input name="consagua" class="emp pz" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="quantareia()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="qareiay" value="Quantidade de areia" class="t v2" readonly>
-<input name="volc" class="painv" readonly>
-<input name="somag" class="painv" readonly>
-<input name="volag" class="painv" readonly>
-<input name="volzx" class="painv" readonly>
-<input name="volf" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas cinco">
-  <p><strong>5º Etapa!</strong> Determinar o traço do cimento.</p>
-</div>
-<form name="tracoexp">
-<font size="3">Peso do cimento <b>(kg)</b> </font> <input name="qcexp" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qaexp" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="qagexp" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qagexp1" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qagexp2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="tracorr()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="qcexpr" class="t" readonly> <b>:</b>
-<input name="qaexpr" class="t" readonly> <b>:</b>
-<input name="qagexp1r" class="t" readonly> <b>:</b>
-<input name="qagexp2r" class="t" readonly> <b>:</b>
-<input name="qagexpr" class="t" readonly>
-<br></br>
-</form>
-<div class="etapas seis">
-  <p><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
-</div>
-<form name="tracocc">
-<font size="3">Umidade da areia <b>(%)</b> </font> <input name="w2" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Peso do cimento <b>(kg)</b></font> <input name="tpcc2" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tarc2" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="taguac2" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tagc2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2c2" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="tracocrr()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="trpcc2" class="t" readonly> <b>:</b>
-<input name="trarc2" class="t verde" readonly> <b>:</b>
-<input name="tragc2" class="t" readonly> <b>:</b>
-<input name="trag2c2" class="t" readonly> <b>:</b>
-<input name="traguac2" class="t verde" readonly>
-<input name="testt2" class="painv" readonly>
-<input name="testtt2" class="painv" readonly>
-<br></br>
-</form>
-<div class="etapas sete">
-  <p><strong>7º Etapa!</strong> Determinar a quantidade de padiolas por m³.</p>
-</div>
-<form name="padiolasporm">
-<font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiolam32" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiolam32" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiolam32" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Inchamento da areia <b>(%)</b></font> <input name="im32" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentom32" class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiam32" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1m32" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2m32" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="laguam32" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muam32" class="emp6" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1m32" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2m32" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="padiolapormc()" value="Calcular" class="calcular"> <b>»</b>
-<input name="qsacocimentom32" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
-<input name="qpadiolasareiam32" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
-<input name="qpadiolaag1m32" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
-<input name="qpadiolaag2m32" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
-<input name="qaguam32" value="Quantidade de litro(s) de água" class="t v4" readonly>
-<input name="calcavulso1" class="painv" readonly>
-<input name="calcavulso2" class="painv" readonly>
-<input name="calcavulso3" class="painv" readonly>
-<input name="calcavulso4" class="painv" readonly>
-<input name="calcavulso5" class="painv" readonly>
-<input name="calcavulso6" class="painv" readonly>
-<input name="calcavulso7" class="painv" readonly>
-<input name="calcavulso8" class="painv" readonly>
-<input name="calcavulso9" class="painv" readonly>
-<input name="calcavulso10" class="painv" readonly>
-<input name="calcavulso11" class="painv" readonly>
-<input name="calcavulso12" class="painv" readonly>
-<input name="calcavulso13" class="painv" readonly>
-<input name="calcavulso14" class="painv" readonly>
-<input name="calcavulso15" class="painv" readonly>
-<input name="calcavulso16" class="painv" readonly>
-<input name="calcavulso17" class="painv" readonly>
-</form>
-<div class="etapas oito">
-  <p><strong>8º Etapa!</strong> Quantidade de material por saco de cimento.</p>
-</div>
-<form name="quantporsc">
-<font size="3">Peso do saco de cimento <b>(kg)</b></font> <input name="pcexp" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Traço corrigido</font> 
-<input name="mtcexp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtaexp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtag1exp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtag2exp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
-<input name="mtaguaexo" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="porsc()" value="Calcular" class="calcular"> <b>»</b> 
-<input name="quantmcexp" value="Quantidade de cimento" class="t v2" readonly>
-<input name="quantmaexp" value="Quantidade de areia" class="t v1" readonly>
-<input name="quantmag1exp" value="Quantidade de AG 1" class="t v1" readonly>
-<input name="quantmag2exp" value="Quantidade de AG 2" class="t v1" readonly>
-<input name="quantmaguaexp" value="Quantidade de água" class="t v5" readonly>
-<br></br>
-</form>
-<div class="etapas nove">
-  <p><strong>9º Etapa!</strong> Determinar a quantidade de padiolas por saco de cimento.</p>
-</div>
-<form name="quantpexp">
-<font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hmaxpadiola" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Comprimento da padiola <b>(m)</b></font> <input name="comprimentopad" class="emp7" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Largura da padiola <b>(m)</b></font> <input name="largurapad" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Inchamento da areia <b>(%)</b></font> <input name="inchamentopad" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Umidade da areia <b>(%)</b></font> <input name="umidadepad" class="emp8" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentopad" class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiapad" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1pad" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2pad" class="emp4" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Quantidade de água <b>(l)</b></font> <input name="qaguapad" class="emp2" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muapad" class="emp6" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1pad" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2pad" class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
-<input type="button" onclick="padiolaexp()" value="Calcular" class="calcular"> <b>»</b>
-<input name="qsacocimimentoexp" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
-<input name="qpadiolasareiaexp" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
-<input name="qpadiolaag1exp" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
-<input name="qpadiolaag2exp" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
-<input name="qaguaexp" value="Quantidade de litro(s) de água" class="t v4" readonly>
+                        <!-- 2° det. Preencher dados -->
+                        <div class="det-massa-position">
+                            <form name="detMassa">
+                                Massa <b>(g)</b></br>
+                                <input name="campo1" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo2" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo3" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo4" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo5" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo6" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo7" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo8" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo9" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo10" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo11" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo12" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo13" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo14" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo15" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo16" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="campo17" class="det-massa"
+                                    onKeyPress="return(ConsisteNumerico('10',this,event))"
+                                    placeholder="INSIRA SEUS DADOS"><br>
+                                <input name="resultado" class="det-massa" readonly><br>
+                            </form>
+                        </div>
+
+                        <!-- 2° det. Massa acumulada -->
+                        <div class="detAcumulada-position">
+                            <form name="detAcumulada">
+                                <text title="Massa Acumulada">Acum. <b>(g)</b></text></br>
+                                <input name="campo1" class="detAcumulada" readonly><br>
+                                <input name="campo2" class="detAcumulada" readonly><br>
+                                <input name="campo3" class="detAcumulada" readonly><br>
+                                <input name="campo4" class="detAcumulada" readonly><br>
+                                <input name="campo5" class="detAcumulada" readonly><br>
+                                <input name="campo6" class="detAcumulada" readonly><br>
+                                <input name="campo7" class="detAcumulada" readonly><br>
+                                <input name="campo8" class="detAcumulada" readonly><br>
+                                <input name="campo9" class="detAcumulada" readonly><br>
+                                <input name="campo10" class="detAcumulada" readonly><br>
+                                <input name="campo11" class="detAcumulada" readonly><br>
+                                <input name="campo12" class="detAcumulada" readonly><br>
+                                <input name="campo13" class="detAcumulada" readonly><br>
+                                <input name="campo14" class="detAcumulada" readonly><br>
+                                <input name="campo15" class="detAcumulada" readonly><br>
+                                <input name="campo16" class="detAcumulada" readonly><br>
+                                <input name="campo17" class="detAcumulada" readonly><br>
+                            </form>
+                        </div>
+
+                        <!-- 2° det. Resultado da % de massa acumulada -->
+                        <div class="detporcen-acumulada-position">
+                            <form name="detporcenAcumulada">
+                                <text title="% de Massa Acumulada">Massa acum. <b>(%)</b></text></br>
+                                <input name="campo1" class="detporcen-acumulada" readonly><br>
+                                <input name="campo2" class="detporcen-acumulada" readonly><br>
+                                <input name="campo3" class="detporcen-acumulada" readonly><br>
+                                <input name="campo4" class="detporcen-acumulada" readonly><br>
+                                <input name="campo5" class="detporcen-acumulada" readonly><br>
+                                <input name="campo6" class="detporcen-acumulada" readonly><br>
+                                <input name="campo7" class="detporcen-acumulada" readonly><br>
+                                <input name="campo8" class="detporcen-acumulada" readonly><br>
+                                <input name="campo9" class="detporcen-acumulada" readonly><br>
+                                <input name="campo10" class="detporcen-acumulada" readonly><br>
+                                <input name="campo11" class="detporcen-acumulada" readonly><br>
+                                <input name="campo12" class="detporcen-acumulada" readonly><br>
+                                <input name="campo13" class="detporcen-acumulada" readonly><br>
+                                <input name="campo14" class="detporcen-acumulada" readonly><br>
+                                <input name="campo15" class="detporcen-acumulada" readonly><br>
+                                <input name="campo16" class="detporcen-acumulada" readonly><br>
+                                <input name="campo17" class="detporcen-acumulada" readonly><br>
+                            </form>
+                        </div>
+
+                        <!-- Porcentagem Acum. Média -->
+                        <div class="porcen-media-position">
+                            <form name="porcenMedia">
+                                <text title="Média das Massas Acumuladas em %">Acum. Média <b>(%)</b></text></br>
+                                <input name="campo1" class="porcen-media" readonly><br>
+                                <input name="campo2" class="porcen-media" readonly><br>
+                                <input name="campo3" class="porcen-media" readonly><br>
+                                <input name="campo4" class="porcen-media" readonly><br>
+                                <input name="campo5" class="porcen-media" readonly><br>
+                                <input name="campo6" class="porcen-media" readonly><br>
+                                <input name="campo7" class="porcen-media" readonly><br>
+                                <input name="campo8" class="porcen-media" readonly><br>
+                                <input name="campo9" class="porcen-media" readonly><br>
+                                <input name="campo10" class="porcen-media" readonly><br>
+                                <input name="campo11" class="porcen-media" readonly><br>
+                                <input name="campo12" class="porcen-media" readonly><br>
+                                <input name="campo13" class="porcen-media" readonly><br>
+                                <input name="campo14" class="porcen-media" readonly><br>
+                                <input name="campo15" class="porcen-media" readonly><br>
+                                <input name="campo16" class="porcen-media" readonly><br>
+                                <input name="campo17" class="porcen-media" readonly><br>
+                            </form>
+                        </div>
+
+                        <!-- Finish - Módulo de Finura -->
+                        <div class="mf-position">
+                            <form name="mff">
+                                <b>Módulo de Finura <a href="#mf"><i class="fas fa-info-circle"></i></a></b></br>
+                                <input name="modulo" class="porcen-media" readonly>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <div class="creditos"><i>Vinícius F.</i> <i class="fas fa-code"></i></div>
+            <div class="iniciacao"></div>
+            <div class="instagram">
+                <div class="instagram-text"><a href="http://www.instagram.com/vinicfreitass" target="_blank">
+                        <font color="#bfe6ba">@</font>vinicfreitass
+                    </a></br><a href="http://www.instagram.com/alexander_rezende31" target="_blank">
+                        <font color="#bfe6ba">@</font>alexander_rezende31
+                    </a></br><a href="http://www.instagram.com/abraaofmedeiros" target="_blank">
+                        <font color="#bfe6ba">@</font>abraaofmedeiros
+                    </a></div>
+            </div>
+        </div>
+
+        <div class="container-box-dos">
+            <div class="box-dos">
+                <div class="icon-2"></div>
+                <center>
+                    <h4>
+                        <div class="tree">DOSAGEM DO CONCRETO</div>
+                    </h4>
+                </center>
+                <h5>O traço pode ser dado por uma relação entre pesos: quilos, toneladas, libras etc. Apesar de melhor
+                    representar a dosagem, o traço em peso é mais difícil de realizar-se na prática.</br>
+                    Em estruturas de grande porte e responsabilidade, o calculista indica o traço de concreto
+                    considerado em seus
+                    cálculos, o qual deve evidentemente ser respeitado. Pode ser diferente do indicado no nosso quadro:
+                    aqui porém
+                    fornecemos os traços normais para estruturas comuns e para o chamado concreto empírico, que é dosado
+                    e
+                    preparado com cuidados normais.</h5>
+            </div>
+            <div class="box-dos cor">
+                <div class="icon-2"></div>
+                <center>
+                    <h4>
+                        <div class="tree">ENSAIO DE GRANULOMETRIA</div>
+                    </h4>
+                </center>
+                <h5>
+                    A descrição quantitativa da textura de um solo é feita através da sua granulometria, ou seja, das
+                    dimensões de
+                    seus grãos e da distribuição percentual dos grãos, em peso, em intervalos de dimensões arbitradas
+                    por métodos
+                    de classificação de solos. Esses intervalos, denominados frações de solo, recebem designações
+                    especiais, para
+                    permitir a descrição dos solos segundo, exclusivamente, a sua granulometria. O tamanho das
+                    partículas que
+                    formam um solo é feita pela análise granulométrica. </h5>
+            </div>
+        </div>
+
+        <div id="empirico" class="modalDialog empirico-box">
+            <div>
+                <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                <div class="etapas y">
+                    <p><strong><i class="fas fa-bullhorn"></i></strong> Para saber quais dados são necessários para o
+                        processo de
+                        dosagem do concreto confira os nossos <strong>procedimentos</strong>!</p>
+                </div>
+                <a href="#procedimentosemp" title="Conferir os procedimentos de cálculo"
+                    class="procedimentos-dosagem">Procedimentos <i class="fas fa-check-circle"></i></a>
+                <a href="#dosagem" title="Voltar aos métodos de dosagem" class="voltar"><i
+                        class="fas fa-angle-double-left"></i>
+                    Voltar</a>
+                </br></br>
+                <center>Dosagem Empírica - Método ABCP</center></br>
+                <div class="etapas">
+                    <p><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação
+                        água/cimento.</p>
+                </div>
+                <div class="img-container">
+                    <img id="myimage" class="abaco1" src="img/abaco1.png" width="492" height="367">
+                    <div class="textoca">
+                        <font size="2.5">Curva de Abrams</font>
+                    </div>
+                </div>
+                <form name="fatorAC">
+                    <font size="3">FCK <b>(MPa)</b></font> <input name="fck" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Sd <b>(MPa)</b></font> <input name="sd" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="fatorac()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="fc28" value="Fc28" class="fc28" readonly><br>
+                    <font size="3">Fator A/C </font> <input name="" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                </form></br></br></br></br></br></br></br></br></br>
+                <div class="etapas dois">
+                    <p><strong>2º Etapa!</strong> Determinar a quantidade de água por meio da relação água/cimento.</p>
+                </div>
+                <form name="detAgua">
+                    <font size="3">Fator A/C </font> <input name="ac" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Peso do cimento <b>(kg)</b></font> <input name="pc" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="detagua()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="pag" value="Quant. de água" class="pag" readonly><br></br>
+                </form>
+
+                <div class="etapas tres">
+                    <p><strong>3º Etapa!</strong> Determinar a quantidade total dos agregados.</p>
+                </div>
+
+                <div class="abaco2">
+                    <font size="2.5">Obs.: Essa tabela foi desenvolvida para agregados comuns (areia, brita), para
+                        seixo rolado tem que diminuir 1% de cada valor.</font>
+                </div>
+
+                <form name="detPm">
+                    <font size="3">Água/materiais secos <b>(%)</b> </font> <input name="a" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="pag2" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Peso do cimento <b>(kg)</b></font> <input name="pc2" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="pesoagregados()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="pm" value="Peso dos agregados" class="pm" readonly><br>
+                    <font size="3">Agregados <b>(kg)</b></font> <input name="" class="emp20"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                </form></br>
+
+                <div class="etapas quatro">
+                    <p><strong>4º Etapa!</strong> Determinar a quantidade de areia e brita.</p>
+                </div>
+
+                <div class="abaco3">
+                    <font size="2.5">* Os valores constates da tabela referem-se a adensamento vibratório.</br>
+                        ** Para adensamento, manual somar 4%.</font>
+                </div>
+
+                <form name="quantAreia">
+                    <font size="3">Quantidade de areia <b>(%)</b></font> <input name="porcAreia" class="emp3"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Peso dos agregados <b>(kg)</b></font> <input name="pesoAgregados" class="emp3"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(%)</b></font> <input name="porcb1" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(%)</b></font> <input name="porcb2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="quantareiaa()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="pa" value="Quant. de areia" class="pa" readonly><br>
+                    <input name="brita" value="Quant. de AG" class="pa" readonly>
+                    <div class="arrow"></div>
+                    <input name="b1" value="Quant. de agregado graúdo 1" class="b1" readonly>
+                    <input name="b2" value="Quant. de agregado graúdo 2" class="b2" readonly>
+                    <input name="pamudado" value="" class="painv" readonly>
+                    <input name="britamudado" value="" class="painv" readonly>
+                </form>
+
+                <div class="etapas cinco">
+                    <p><strong>5º Etapa!</strong> Determinar o traço por kg de cimento.</p>
+                </div>
+
+                <form name="traco">
+                    <font size="3">Peso do cimento <b>(kg)</b> </font> <input name="tpc" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tar" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="tagua" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tag" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="tracor()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="trpc" class="t" readonly> <b>:</b>
+                    <input name="trar" class="t" readonly> <b>:</b>
+                    <input name="trag" class="t" readonly> <b>:</b>
+                    <input name="trag2" class="t" readonly> <b>:</b>
+                    <input name="tragua" class="t" readonly>
+                    <br></br>
+                </form>
+                
+                <div class="etapas seis">
+                    <p><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
+                </div>
+
+                <form name="tracoc">
+                    <font size="3">Umidade da areia <b>(%)</b> </font> <input name="w" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Peso do cimento <b>(kg)</b></font> <input name="tpcc" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tarc" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="taguac" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tagc" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2c" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="tracocr()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="trpcc" class="t" readonly> <b>:</b>
+                    <input name="trarc" class="t verde" readonly> <b>:</b>
+                    <input name="tragc" class="t" readonly> <b>:</b>
+                    <input name="trag2c" class="t" readonly> <b>:</b>
+                    <input name="traguac" class="t verde" readonly>
+                    <input name="testt" class="painv" readonly>
+                    <input name="testtt" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas sete">
+                    <p><strong>7º Etapa!</strong> Volume de material por saco de cimento.</p>
+                </div>
+
+                <form name="volumepc">
+                    <font size="3">Inchamento da areia <b>(%)</b></font> <input name="i" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareia" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="mua" class="emp6"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="volumesc()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="vareiaseca" value="Volume da areia seca" class="t v1" readonly>
+                    <input name="vareiaumida" value="Volume da areia umida" class="t v2 verde" readonly>
+                    <input name="vag1" value="Volume do agregado graúdo 1" class="t v3 verde" readonly>
+                    <input name="vag2" value="Volume do agregado graúdo 2" class="t v3 verde" readonly>
+                    <input name="vareiasecat" class="painv" readonly></br></br>
+                </form>
+
+                <div class="etapas oito">
+                    <p><strong>8º Etapa!</strong> Determinação das padiolas por saco de cimento.</p>
+                </div>
+
+                <form name="padiolas">
+                    <font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiola" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiola" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiola" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Volume da areia umida <b>(m³)</b></font> <input name="pvau" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Volume do agregado graúdo 1 <b>(m³)</b></font> <input name="pvag1" class="emp10"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Volume do agregado graúdo 2 <b>(m³)</b></font> <input name="pvag2" class="emp10"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="padiolasc()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qpadiolasareia" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
+                    <input name="qpadiolaag1" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
+                    <input name="qpadiolaag2" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
+                    <input name="dimensaopadiola" class="painv" readonly>
+                    <input name="qpadiolasareiat" class="painv" readonly>
+                    <input name="pvag1t" class="painv" readonly>
+                    <input name="pvag2t" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas nove">
+                    <p><strong>9º Etapa!</strong> Quantidade de material por m³.</p>
+                </div>
+
+                <form name="quantporm">
+                    <font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="mcubico" class="emp4 ff"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa específica do cimento <b>(kg/dm³)</b></font> <input name="mespc"
+                        class="emp4 cc" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa específica da areia <b>(kg/dm³)</b></font> <input name="mespa" class="emp4 aa"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa específica do agregado graúdo <b>(kg/dm³)</b></font> <input name="mespag"
+                        class="emp4 gg" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Traço por kg de cimento corrigido</font>
+                    <input name="mtc" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mta" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtag1" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtag2" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtagua" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="quantpormetro()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="quantmc" value="Quantidade de cimento" class="t v2" readonly>
+                    <input name="quantma" value="Quantidade de areia" class="t v1" readonly>
+                    <input name="quantmag1" value="Quantidade de AG 1" class="t v1" readonly>
+                    <input name="quantmag2" value="Quantidade de AG 2" class="t v1" readonly>
+                    <input name="quantmagua" value="Quantidade de água" class="t v5" readonly>
+                    <input name="quantmct" class="painv" readonly>
+                    <input name="quantmctt" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas dez">
+                    <p><strong>10º Etapa!</strong> Determinação das padiolas por m³.</p>
+                </div>
+
+                <form name="padiolasm3">
+                    <font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiolam3" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiolam3" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiolam3" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Inchamento da areia <b>(%)</b></font> <input name="im3" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Umidade da areia <b>(%)</b></font> <input name="um3" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentom3"
+                        class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiam3" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1m3" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2m3" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="laguam3" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muam3" class="emp6"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1m3"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2m3"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="padiolam()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qsacocimentom3" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
+                    <input name="qpadiolasareiam3" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
+                    <input name="qpadiolaag1m3" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
+                    <input name="qpadiolaag2m3" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
+                    <input name="qaguam3" value="Quantidade de litro(s) de água" class="t v4" readonly>
+                    <input name="qsacocimentom3t" class="painv" readonly>
+                    <input name="qaguam3t" class="painv" readonly>
+                    <input name="qareiasecat" class="painv" readonly>
+                    <input name="vast" class="painv" readonly>
+                    <input name="vaht" class="painv" readonly>
+                    <input name="vpadiolam3" class="painv" readonly>
+                    <input name="padiolasm3areia" class="painv" readonly>
+                    <input name="padiolasm3areiat" class="painv" readonly>
+                    <input name="padiolasm3areiatt" class="painv" readonly>
+                    <input name="padiolasm3areiattt" class="painv" readonly>
+                    <input name="qpadiolaag1m3t" class="painv" readonly>
+                    <input name="qpadiolaag1m3tt" class="painv" readonly>
+                    <input name="qpadiolaag1m3ttt" class="painv" readonly>
+                    <input name="qpadiolaag1m3tttt" class="painv" readonly>
+                    <input name="qpadiolaag2m3t" class="painv" readonly>
+                    <input name="qpadiolaag2m3tt" class="painv" readonly>
+                    <input name="qpadiolaag2m3ttt" class="painv" readonly>
+                    <input name="qpadiolaag2m3tttt" class="painv" readonly>
+                </form>
+
+                <div class="etapas h">
+                    <p><strong><i class="fas fa-table"></i></strong> &nbsp;<strong>Tabela de Resultados</strong></p>
+                </div></br>
+                <div class="etapasj j j5"><strong>Quant. de material</br>por saco de</br>cimento (kg)</strong>
+                </div>
+                <div class="etapasj j j2">
+                    <strong>Traço do </br>concreto</strong>
+                </div>
+                <div class="etapasj j j6">
+                    <div class="corrigido cor1"><strong>* Corrigido</strong></div><strong>Quant. de material</br>por
+                        saco
+                        de</br>cimento (kg)</strong>
+                </div>
+                <div class="etapasj j j2">
+                    <div class="corrigido"><strong>* Corrigido</strong></div><strong>Traço do </br>concreto</strong>
+                </div>
+                <div class="etapasj j j3"><strong>Vol. para</br>1 saco de cimento (m³)</strong>
+                </div>
+                <div class="etapasj j j7"><strong>Padiolas para</br>1 saco de cimento (m³)</strong>
+                </div>
+                <div class="etapasj j j5"><strong>Quant. de material</br>para <font color="#6c5ce7">x</font> m³</br>de
+                        concreto
+                        (kg)</strong>
+                </div>
+                <div class="etapasj j j3"><strong>Vol. para</br>
+                        <font color="#6c5ce7">x</font> m³ de concreto (m³)
+                    </strong>
+                </div>
+                <div class="etapasj j j7"><strong>Padiolas para</br>
+                        <font color="#6c5ce7">x</font> m³ de concreto (m³)
+                    </strong>
+                </div>
+                </br></br></br></br></br>
+                <div class="table-text"><strong>Cimento</br>
+                        Areia</br>
+                        AG 1</br>
+                        AG 2</br>
+                        Água</strong></div>
+                <form name="tabelasc">
+                    <input name="tabelascc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc3"
+                        value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc4" value=""
+                        class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc5" value="-------------"
+                        class="pag tabelaform2" readonly>
+                    <!-- A --> <input name="tabelascc6" value="---------------------------" class="pag tabelaform3"
+                        readonly>
+                    <!-- A --> <input name="tabelascc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelascc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelascc9"
+                        value="" class="pag tabelaform3" readonly></br>
+
+                    <input name="tabelasccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input
+                        name="tabelasccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelasccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccc9" value="" class="pag tabelaform3" readonly></br>
+
+                    <input name="tabelascccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input
+                        name="tabelascccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelascccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelascccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccc9" value="" class="pag tabelaform3" readonly></br>
+
+                    <input name="tabelasccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccccc5" value="" class="pag tabelaform2" readonly> <!-- A -->
+                    <input name="tabelasccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelasccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasccccc9" value="" class="pag tabelaform3" readonly></br>
+
+                    <input name="tabelascccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccccc5" value="" class="pag tabelaform2" readonly> <!-- A -->
+                    <input name="tabelascccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelascccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelascccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelascccccc9" value="" class="pag tabelaform3" readonly></br>
+
+                    <input type="button" onclick="tabela()" value="Calcular" class="calcular">
+                </form>
+            </div>
+        </div>
+
+        <div id="experimental" class="modalDialog experimental-box">
+            <div>
+                <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                <div class="etapas y">
+                    <p><strong><i class="fas fa-bullhorn"></i></strong> Para saber quais dados são necessários para o
+                        processo de
+                        dosagem do concreto confira os nossos <strong>procedimentos</strong>!</p>
+                </div>
+                <a href="#procedimentosexp" title="Conferir os procedimentos de cálculo"
+                    class="procedimentos-dosagem">Procedimentos <i class="fas fa-check-circle"></i></a>
+                <a href="#dosagem" title="Voltar aos métodos de dosagem" class="voltar"><i
+                        class="fas fa-angle-double-left"></i>
+                    Voltar</a>
+                </br></br>
+                <center>Dosagem Experimental - Método ABCP</center></br>
+
+                <div class="etapas">
+                    <p><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação
+                        água/cimento.</p>
+                </div>
+
+                <div class="img-container">
+                    <img id="myimage" class="abaco1" src="img/abaco1.png" width="492" height="367">
+                    <div class="textoca">
+                        <font size="2.5">Curva de Abrams</font>
+                    </div>
+                </div>
+
+                <form name="exfatorAC">
+                    <font size="3">FCK <b>(MPa)</b></font> <input name="exfck" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Sd <b>(MPa)</b></font> <input name="exsd" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="exfatorac()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="exfc28" value="Fc28" class="fc28" readonly></br>
+                    <font size="3">Fator A/C </font> <input name="" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                </form></br></br></br></br></br></br></br></br></br>
+
+                <div class="etapas dois">
+                    <p><strong>2º Etapa!</strong> Calcular a quantidade de água e cimento em função da consistência e da
+                        dimensão
+                        máxima
+                        característica do agregado.</p>
+                </div>
+
+                <div class="abaco4">
+                    <font size="2.5">Consumo de água aproximado em litro por metro cúbico.</font>
+                </div>
+
+                <form name="detCag">
+                    <font size="3">Fator A/C </font> <input name="acexp" class="emp"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Consumo de água <b>(l/m³)</b></font> <input name="cag" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub" class="emp4 mm"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="qcimento()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qc" value="Quantidade de cimento" class="t v2" readonly> <input name="consaguaa"
+                        value="Consumo de água" class="t v2" readonly><br>
+                    <input name="qcc" class="painv" readonly>
+                </form>
+
+                <div class="etapas tres">
+                    <p><strong>3º Etapa!</strong> Determinar a quantidade de agregado graúdo em função do módulo de
+                        finura e da
+                        dimensão máxima característica do agregado.</p>
+                </div>
+
+                <div class="abaco5">
+                    <font size="2.5">Volume compactado seco (Vc) do agregado graúdo por metro cúbico de concreto.</font>
+                </div>
+
+                <form name="detQag">
+                    <font size="3">Massa unitária do agregado graúdo <b>(kg/m³)</b></font> <input name="mua"
+                        class="emp9" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub2" class="emp4 mm"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Volume compactado seco <b>(m³)</b> </font> <input name="vcs" class="emp6"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(%)</b> </font> <input name="qagexp" class="emp24"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(%)</b></font> <input name="qagexpp" class="emp24"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="qagexppp()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qagg1" value="Quantidade de Agregado Graúdo 1" class="t v24" readonly> <input
+                        name="qagg2" value="Quantidade de Agregado Graúdo 2" class="t v24" readonly>
+                    <input name="qagg" class="painv" readonly>
+                    <input name="qaggg" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas quatro">
+                    <p><strong>4º Etapa!</strong> Determinar a quantidade de areia.</p>
+                </div>
+
+                <form name="detAreia">
+                    <font size="3">Massa específica do cimento <b>(kg/m³)</b></font> <input name="mespc" class="emp4 tx"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa específica do AG <b>(kg/m³)</b></font> <input name="mespag" class="emp4 hg"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa específica da areia <b>(kg/m³)</b></font> <input name="mespareia"
+                        class="emp4 mm" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Metros cúbicos de concreto <b>(m³)</b></font> <input name="qmcub3" class="emp4 mm"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qciment" class="emp6 tw"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1z" class="emp24"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b> </font> <input name="qag2z" class="emp24"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Consumo de água <b>(l)</b> </font> <input name="consagua" class="emp pz"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="quantareia()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qareiay" value="Quantidade de areia" class="t v2" readonly>
+                    <input name="volc" class="painv" readonly>
+                    <input name="somag" class="painv" readonly>
+                    <input name="volag" class="painv" readonly>
+                    <input name="volzx" class="painv" readonly>
+                    <input name="volf" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas cinco">
+                    <p><strong>5º Etapa!</strong> Determinar o traço do cimento.</p>
+                </div>
+
+                <form name="tracoexp">
+                    <font size="3">Peso do cimento <b>(kg)</b> </font> <input name="qcexp" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qaexp" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="qagexp" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qagexp1" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qagexp2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="tracorr()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qcexpr" class="t" readonly> <b>:</b>
+                    <input name="qaexpr" class="t" readonly> <b>:</b>
+                    <input name="qagexp1r" class="t" readonly> <b>:</b>
+                    <input name="qagexp2r" class="t" readonly> <b>:</b>
+                    <input name="qagexpr" class="t" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas seis">
+                    <p><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
+                </div>
+
+                <form name="tracocc">
+                    <font size="3">Umidade da areia <b>(%)</b> </font> <input name="w2" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Peso do cimento <b>(kg)</b></font> <input name="tpcc2" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="tarc2" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="taguac2" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="tagc2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="tag2c2" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="tracocrr()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="trpcc2" class="t" readonly> <b>:</b>
+                    <input name="trarc2" class="t verde" readonly> <b>:</b>
+                    <input name="tragc2" class="t" readonly> <b>:</b>
+                    <input name="trag2c2" class="t" readonly> <b>:</b>
+                    <input name="traguac2" class="t verde" readonly>
+                    <input name="testt2" class="painv" readonly>
+                    <input name="testtt2" class="painv" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas sete">
+                    <p><strong>7º Etapa!</strong> Determinar a quantidade de padiolas por m³.</p>
+                </div>
+
+                <form name="padiolasporm">
+                    <font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hpadiolam32" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Comprimento da padiola <b>(m)</b></font> <input name="cpadiolam32" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Largura da padiola <b>(m)</b></font> <input name="lpadiolam32" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Inchamento da areia <b>(%)</b></font> <input name="im32" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentom32"
+                        class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiam32" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1m32" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2m32" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="laguam32" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muam32" class="emp6"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1m32"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2m32"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="padiolapormc()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qsacocimentom32" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
+                    <input name="qpadiolasareiam32" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
+                    <input name="qpadiolaag1m32" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
+                    <input name="qpadiolaag2m32" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
+                    <input name="qaguam32" value="Quantidade de litro(s) de água" class="t v4" readonly>
+                    <input name="calcavulso1" class="painv" readonly>
+                    <input name="calcavulso2" class="painv" readonly>
+                    <input name="calcavulso3" class="painv" readonly>
+                    <input name="calcavulso4" class="painv" readonly>
+                    <input name="calcavulso5" class="painv" readonly>
+                    <input name="calcavulso6" class="painv" readonly>
+                    <input name="calcavulso7" class="painv" readonly>
+                    <input name="calcavulso8" class="painv" readonly>
+                    <input name="calcavulso9" class="painv" readonly>
+                    <input name="calcavulso10" class="painv" readonly>
+                    <input name="calcavulso11" class="painv" readonly>
+                    <input name="calcavulso12" class="painv" readonly>
+                    <input name="calcavulso13" class="painv" readonly>
+                    <input name="calcavulso14" class="painv" readonly>
+                    <input name="calcavulso15" class="painv" readonly>
+                    <input name="calcavulso16" class="painv" readonly>
+                    <input name="calcavulso17" class="painv" readonly>
+                </form>
+
+                <div class="etapas oito">
+                    <p><strong>8º Etapa!</strong> Quantidade de material por saco de cimento.</p>
+                </div>
+
+                <form name="quantporsc">
+                    <font size="3">Peso do saco de cimento <b>(kg)</b></font> <input name="pcexp" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Traço corrigido</font>
+                    <input name="mtcexp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtaexp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtag1exp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtag2exp" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"> <b>:</b>
+                    <input name="mtaguaexo" class="t" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="porsc()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="quantmcexp" value="Quantidade de cimento" class="t v2" readonly>
+                    <input name="quantmaexp" value="Quantidade de areia" class="t v1" readonly>
+                    <input name="quantmag1exp" value="Quantidade de AG 1" class="t v1" readonly>
+                    <input name="quantmag2exp" value="Quantidade de AG 2" class="t v1" readonly>
+                    <input name="quantmaguaexp" value="Quantidade de água" class="t v5" readonly>
+                    <br></br>
+                </form>
+
+                <div class="etapas nove">
+                    <p><strong>9º Etapa!</strong> Determinar a quantidade de padiolas por saco de cimento.</p>
+                </div>
+
+                <form name="quantpexp">
+                    <font size="3">Altura máxima da padiola <b>(m)</b> </font> <input name="hmaxpadiola" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Comprimento da padiola <b>(m)</b></font> <input name="comprimentopad" class="emp7"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Largura da padiola <b>(m)</b></font> <input name="largurapad" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Inchamento da areia <b>(%)</b></font> <input name="inchamentopad" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Umidade da areia <b>(%)</b></font> <input name="umidadepad" class="emp8"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de cimento <b>(kg)</b></font> <input name="qcimentopad"
+                        class="emp6 cimento" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de areia <b>(kg)</b></font> <input name="qareiapad" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 1 <b>(kg)</b></font> <input name="qag1pad" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de agregado graúdo 2 <b>(kg)</b></font> <input name="qag2pad" class="emp4"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Quantidade de água <b>(l)</b></font> <input name="qaguapad" class="emp2"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária da areia <b>(kg/m³)</b> </font> <input name="muapad" class="emp6"
+                        onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 1 <b>(kg/m³)</b> </font> <input name="muag1pad"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <font size="3">Massa unitária do agregado graúdo 2 <b>(kg/m³)</b> </font> <input name="muag2pad"
+                        class="emp5" onKeyPress="return(ConsisteNumerico('10',this,event))"><br>
+                    <input type="button" onclick="padiolaexp()" value="Calcular" class="calcular"> <b>»</b>
+                    <input name="qsacocimimentoexp" value="Quantidade de saco(s) de cimento" class="t v4" readonly>
+                    <input name="qpadiolasareiaexp" value="Quantidade de padiola(s) de areia" class="t v4" readonly>
+                    <input name="qpadiolaag1exp" value="Quantidade de padiola(s) de AG 1" class="t v4" readonly>
+                    <input name="qpadiolaag2exp" value="Quantidade de padiola(s) de AG 2" class="t v4" readonly>
+                    <input name="qaguaexp" value="Quantidade de litro(s) de água" class="t v4" readonly>
 
 
-<input name="calculoavulso1" class="painv" readonly>
-<input name="calculoavulso2" class="painv" readonly>
-<input name="calculoavulso3" class="painv" readonly>
-<input name="calculoavulso4" class="painv" readonly>
-<input name="calculoavulso5" class="painv" readonly>
-<input name="calculoavulso6" class="painv" readonly>
-<input name="calculoavulso7" class="painv" readonly>
-<input name="calculoavulso8" class="painv" readonly>
-<input name="calculoavulso9" class="painv" readonly>
-<input name="calculoavulso10" class="painv" readonly>
-<input name="calculoavulso11" class="painv" readonly>
-<input name="calculoavulso12" class="painv" readonly>
-<input name="calculoavulso13" class="painv" readonly>
+                    <input name="calculoavulso1" class="painv" readonly>
+                    <input name="calculoavulso2" class="painv" readonly>
+                    <input name="calculoavulso3" class="painv" readonly>
+                    <input name="calculoavulso4" class="painv" readonly>
+                    <input name="calculoavulso5" class="painv" readonly>
+                    <input name="calculoavulso6" class="painv" readonly>
+                    <input name="calculoavulso7" class="painv" readonly>
+                    <input name="calculoavulso8" class="painv" readonly>
+                    <input name="calculoavulso9" class="painv" readonly>
+                    <input name="calculoavulso10" class="painv" readonly>
+                    <input name="calculoavulso11" class="painv" readonly>
+                    <input name="calculoavulso12" class="painv" readonly>
+                    <input name="calculoavulso13" class="painv" readonly>
 
 
-</br>
-</form>
-<div class="etapas h">
-<p><strong><i class="fas fa-table"></i></strong> &nbsp;<strong>Tabela de Resultados</strong></p>
-</div></br>
-<div class="etapasj j j5"><strong>Quant. de material</br>por saco de</br>cimento (kg)</strong>
-</div>
-<div class="etapasj j j2">
-<strong>Traço do </br>concreto</strong>
-</div>
-<div class="etapasj j j6"><div class="corrigido cor1"><strong>* Corrigido</strong></div><strong>Material</br>para <font color="#6c5ce7">x</font> m³</br>de concreto (kg)</strong>
-</div>
-<div class="etapasj j j2"><div class="corrigido"><strong>* Corrigido</strong></div><strong>Traço do </br>concreto</strong>
-</div>
-<div class="etapasj j j3"><strong>Vol. para</br>1 saco de cimento (m³)</strong>
-</div>
-<div class="etapasj j j7"><strong>Padiolas para</br>1 saco de cimento (m³)</strong>
-</div>
-<div class="etapasj j j5"><strong>Quant. de material</br>para <font color="#6c5ce7">x</font> m³</br>de concreto (kg)</strong>
-</div>
-<div class="etapasj j j3"><strong>Vol. para</br> <font color="#6c5ce7">x</font> m³ de concreto (m³)</strong>
-</div>
-<div class="etapasj j j7"><strong>Padiolas para</br><font color="#6c5ce7">x</font> m³ de concreto (m³)</strong>
-</div>
-</br></br></br></br></br>
-<div class="table-text"><strong>Cimento</br>
-Areia</br>
-AG 1</br>
-AG 2</br>
-Água</strong></div>
-<form name="tabelaexpp">
-<input name="tabelasexpcc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcc5" value="-------------" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasexpcc6" value="---------------------------" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasexpcc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasexpcc8" value="---------------" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcc9" value="" class="pag tabelaform3" readonly></br> 
+                    </br>
+                </form>
 
-<input name="tabelasexpccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasexpccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasexpccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasexpccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccc9" value="" class="pag tabelaform3" readonly></br>
+                <div class="etapas h">
+                    <p><strong><i class="fas fa-table"></i></strong> &nbsp;<strong>Tabela de Resultados</strong></p>
+                </div></br>
+                <div class="etapasj j j5"><strong>Quant. de material</br>por saco de</br>cimento (kg)</strong>
+                </div>
+                <div class="etapasj j j2">
+                    <strong>Traço do </br>concreto</strong>
+                </div>
+                <div class="etapasj j j6">
+                    <div class="corrigido cor1"><strong>* Corrigido</strong></div><strong>Material</br>para <font
+                            color="#6c5ce7">
+                            x</font> m³</br>de concreto (kg)</strong>
+                </div>
+                <div class="etapasj j j2">
+                    <div class="corrigido"><strong>* Corrigido</strong></div><strong>Traço do </br>concreto</strong>
+                </div>
+                <div class="etapasj j j3"><strong>Vol. para</br>1 saco de cimento (m³)</strong>
+                </div>
+                <div class="etapasj j j7"><strong>Padiolas para</br>1 saco de cimento (m³)</strong>
+                </div>
+                <div class="etapasj j j5"><strong>Quant. de material</br>para <font color="#6c5ce7">x</font> m³</br>de
+                        concreto
+                        (kg)</strong>
+                </div>
+                <div class="etapasj j j3"><strong>Vol. para</br>
+                        <font color="#6c5ce7">x</font> m³ de concreto (m³)
+                    </strong>
+                </div>
+                <div class="etapasj j j7"><strong>Padiolas para</br>
+                        <font color="#6c5ce7">x</font> m³ de concreto (m³)
+                    </strong>
+                </div>
+                </br></br></br></br></br>
+                <div class="table-text"><strong>Cimento</br>
+                        Areia</br>
+                        AG 1</br>
+                        AG 2</br>
+                        Água</strong></div>
+                <form name="tabelaexpp">
+                    <input name="tabelasexpcc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcc5" value="-------------" class="pag tabelaform2" readonly>
+                    <!-- A --> <input name="tabelasexpcc6" value="---------------------------" class="pag tabelaform3"
+                        readonly>
+                    <!-- A --> <input name="tabelasexpcc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasexpcc8" value="---------------" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcc9" value="" class="pag tabelaform3" readonly></br>
 
-<input name="tabelasexpcccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasexpcccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasexpcccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasexpcccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccc9" value="" class="pag tabelaform3" readonly></br>
+                    <input name="tabelasexpccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccc5" value="" class="pag tabelaform2" readonly> <!-- A -->
+                    <input name="tabelasexpccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelasexpccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasexpccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccc9" value="" class="pag tabelaform3" readonly></br>
 
-<input name="tabelasexpccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasexpccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasexpccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasexpccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpccccc9" value="" class="pag tabelaform3" readonly></br>
+                    <input name="tabelasexpcccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input
+                        name="tabelasexpcccc6" value="" class="pag tabelaform3" readonly> <!-- A -->
+                    <input name="tabelasexpcccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasexpcccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccc9" value="" class="pag tabelaform3" readonly></br>
 
-<input name="tabelasexpcccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input name="tabelasexpcccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input name="tabelasexpcccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input name="tabelasexpcccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input name="tabelasexpcccccc9" value="" class="pag tabelaform3" readonly></br>
+                    <input name="tabelasexpccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input
+                        name="tabelasexpccccc6" value="" class="pag tabelaform3" readonly> <!-- A -->
+                    <input name="tabelasexpccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasexpccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpccccc9" value="" class="pag tabelaform3" readonly></br>
 
-<input type="button" onclick="tabelaexp()" value="Calcular" class="calcular">
-</form>
-</div>
-</div>
-<div id="procedimentosemp" class="modalDialog procedimentos-emp">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<a href="#empirico" title="Voltar ao método empírico" class="passos">Método Empírico <i class="fas fa-check-circle"></i></a>
-<h6><b>A metodologia empírica foi desenvolvida com base na dosagem ABCP.</b></h6>
-<div class="etapas doze">
-  <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo divulgar os passos realizados para calcular o Método Empírico.</p>
-</div>
-</br>
-<div class="etapas-procedimento">
-  <p style="text-align: left;"><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação água/cimento.</p>
-</div>
-<div class="eq"></div>
-<div class="onde">
-Onde:</br>
-<b>fc28</b> - resistência do concreto aos 28 dias.</br>
-<b>fck</b> - resistência à compressão do concreto.</br>
-<b>sd</b> - sedimento do concreto.</br>
-</div></br>
-<div class="etapas-procedimento dois">
-  <p style="text-align: left;"><strong>2º Etapa!</strong> Determinar a quantidade de água por meio da relação água/cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/pag.png); background-repeat: no-repeat; height: 68px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>a/c</b> - relação água/cimento encontrada no gráfico.</br>
-<b>Pag</b> - peso da água.</br>
-<b>Pc</b> - peso do saco de cimento (adota-se 50kg).</br>
-</div></br>
-<div class="etapas-procedimento tres">
-  <p style="text-align: left;"><strong>3º Etapa!</strong> Determinar a quantidade total dos agregados.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/a.png); background-repeat: no-repeat; height: 71px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>A%</b> - relação água/materiais secos.</br>
-<b>Pag</b> - peso da água.</br>
-<b>Pc</b> - peso do saco de cimento (adota-se 50kg).</br>
-<b>Pm</b> - peso de agregados (miúdo e graúdo).</br>
-</div></br>
-<div class="etapas-procedimento quatro">
-  <p style="text-align: left;"><strong>4º Etapa!</strong> Determinar a quantidade de areia e brita.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/pm.png); background-repeat: no-repeat; height: 31px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pm</b> - peso de agregados (miúdo e graúdo).</br>
-<b>Porc. agregado</b> - porcentagem dos agregados (miúdo e graúdo).</br>
-</div></br>
-<div class="etapas-procedimento cinco">
-  <p style="text-align: left;"><strong>5º Etapa!</strong> Determinar o traço por kg de cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/traco.png); background-repeat: no-repeat; height: 69px; width: 407px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pc</b> - peso do saco de cimento.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-<b>Mb1</b> - peso do agregado graúdo 1.</br>
-<b>Mb2</b> - peso do agregado graúdo 2.</br>
-<b>Pag</b> - peso da água.</br>
-</div></br>
-<div class="etapas-procedimento seis">
-  <p style="text-align: left;"><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>W</b> - umidade do agregado miúdo.</br>
-<b>Ph</b> - peso úmido do agregado miúdo.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/pa.png); background-repeat: no-repeat; height: 31px; width: 309px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pa</b> - peso da água corrigido.</br>
-<b>Ph</b> - peso do agregado miúdo úmido.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-<b>Pag</b> - peso da água.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/tracoc.png); background-repeat: no-repeat; height: 69px; width: 410px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pc</b> - peso do saco de cimento.</br>
-<b>Ph</b> - peso do agregado miúdo úmido.</br>
-<b>Mb1</b> - peso do agregado graúdo 1.</br>
-<b>Mb2</b> - peso do agregado graúdo 2.</br>
-<b>Pa</b> - peso da água corridigo.</br>
-</div></br>
-<div class="etapas-procedimento sete">
-  <p style="text-align: left;"><strong>7º Etapa!</strong> Volume de material por saco de cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/delta.png); background-repeat: no-repeat; height: 69px; width: 96px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>δ</b> - massa unitária do agregado.</br>
-<b>M</b> - massa do agregado.</br>
-<b>V</b> - volume do agregado.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/inchamento.png); background-repeat: no-repeat; height: 70px; width: 190px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>I</b> - inchamento do agregado miúdo.</br>
-<b>Vh</b> - volume do agregado miúdo úmido.</br>
-<b>Vs</b> - volume do agregado miúdo seco.</br>
-</div></br>
-<div class="etapas-procedimento oito">
-  <p style="text-align: left;"><strong>8º Etapa!</strong> Determinação das padiolas por saco de cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>h</b> - altura da padiola.</br>
-<b>L</b> - largura da padiola.</br>
-<b>C</b> - comprimento da padiola.</br>
-<b>V</b> - volume do agregado.</br>
-</div></br>
-<div class="etapas-procedimento nove">
-  <p style="text-align: left;"><strong>9º Etapa!</strong> Quantidade de material por m³.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/c.png); background-repeat: no-repeat; height: 84px; width: 354px"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>C</b> - consumo de cimento.</br>
-<b>Dc, Da, Dp</b> - massa específica do cimento, areia e pedra.</br>
-<b>a</b> - peso da areia.</br>
-<b>p</b> - peso do agregado graúdo.</br>
-<b>a/c</b> - relação água/cimento.</br>
-</div></br>
-<div class="etapas-procedimento dez">
-  <p style="text-align: left;"><strong>10º Etapa!</strong> Determinação das padiolas por m³.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/b.png); background-repeat: no-repeat; height: 68px; width: 98px"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>V</b> - volume do agregado.</br>
-<b>δ</b> - massa unitária do agregado.</br>
-<b>P</b> - peso do agregado.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/i.png); background-repeat: no-repeat; height: 70px; width: 244px"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>I</b> - inchamento do agregado miúdo.</br>
-<b>Vah</b> - volume do agregado miúdo úmido.</br>
-<b>Vs</b> - volume do agregado miúdo seco.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>h</b> - altura da padiola.</br>
-<b>L</b> - largura da padiola.</br>
-<b>C</b> - comprimento da padiola.</br>
-<b>V</b> - volume do agregado.</br>
-</div></br>
-</div>
-</div>
-<div id="procedimentosexp" class="modalDialog procedimentos-exp">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<a href="#experimental" title="Voltar ao método experimental" class="passos">Método Experimental <i class="fas fa-check-circle"></i></a>
-<h6><b>A metodologia experimental foi desenvolvida com base na dosagem ABCP.</b></h6>
-<div class="etapas doze">
-  <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo divulgar os passos realizados para calcular o Método Experimental.</p>
-</div>
-</br>
-<div class="etapas-procedimento">
-  <p style="text-align: left;"><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do gráfico de relação água/cimento.</p>
-</div>
-<div class="eq"></div>
-<div class="onde">
-Onde:</br>
-<b>fc28</b> - resistência do concreto aos 28 dias.</br>
-<b>fck</b> - resistência à compressão do concreto.</br>
-<b>sd</b> - sedimento do concreto.</br>
-</div></br>
-<div class="etapas-procedimento dois">
-  <p style="text-align: left;"><strong>2º Etapa!</strong> Calcular a quantidade de água e cimento em função da consistência e da dimensão máxima característica do agregado.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/cag.png); background-repeat: no-repeat; height: 77px;"></div>
-<div class="onde">
-Onde:</br>
-<b>C</b> - consumo de cimento.</br>
-<b>Cag</b> - consumo de água encontrado na tabela (por meio do slumptest).</br>
-<b>a/c</b> - relação água/cimento.</br>
-</div></br>
-<div class="etapas-procedimento tres">
-  <p style="text-align: left;"><strong>3º Etapa!</strong> Determinar a quantidade de agregado graúdo em função do módulo de finura e da dimensão máxima característica do agregado.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/cb.png); background-repeat: no-repeat; height: 25px;"></div>
-<div class="onde">
-Onde:</br>
-<b>Cb</b> - consumo de agregado graúdo.</br>
-<b>Vc</b> - volume compactado seco do agregado graúdo (encontrado na tabela por meio do DMC e do MF).</br>
-<b>Mc</b> - massa unitária do agregado graúdo.</br>
-</div></br>
-<div class="etapas-procedimento quatro">
-  <p style="text-align: left;"><strong>4º Etapa!</strong> Determinar a quantidade de areia.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/vm.png); background-repeat: no-repeat; height: 76px; width: 401px;"></div>
-<div class="onde">
-Onde:</br>
-<b>Vm</b> - volume da areia.</br>
-<b>x</b> - volume do concreto.</br>
-<b>Ca</b> - consumo de água.</br>
-<b>Cc</b> - consumo de cimento.</br>
-<b>Cb</b> - consumo de agregado graúdo.</br>
-<b>γa</b> - massa específica da água.</br>
-<b>γc</b> - massa específica do cimento.</br>
-<b>γb</b> - massa específica do agregado graúdo.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/cm.png); background-repeat: no-repeat; height: 31px; width: 401px;"></div>
-<div class="onde">
-Onde:</br>
-<b>Cm</b> - consumo de areia.</br>
-<b>γm</b> - massa específica da areia.</br>
-<b>Vm</b> - volume da areia.</br>
-</div></br>
-<div class="etapas-procedimento cinco">
-  <p style="text-align: left;"><strong>5º Etapa!</strong> Determinar o traço do cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/traco.png); background-repeat: no-repeat; height: 69px; width: 407px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pc</b> - peso do saco de cimento.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-<b>Mb1</b> - peso do agregado graúdo 1.</br>
-<b>Mb2</b> - peso do agregado graúdo 2.</br>
-<b>Pag</b> - peso da água.</br>
-</div></br>
-<div class="etapas-procedimento seis">
-  <p style="text-align: left;"><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>W</b> - umidade do agregado miúdo.</br>
-<b>Ph</b> - peso úmido do agregado miúdo.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/pa.png); background-repeat: no-repeat; height: 31px; width: 309px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pa</b> - peso da água corrigido.</br>
-<b>Ph</b> - peso do agregado miúdo úmido.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-<b>Pag</b> - peso da água.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/tracoc.png); background-repeat: no-repeat; height: 69px; width: 410px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pc</b> - peso do saco de cimento.</br>
-<b>Ph</b> - peso do agregado miúdo úmido.</br>
-<b>Mb1</b> - peso do agregado graúdo 1.</br>
-<b>Mb2</b> - peso do agregado graúdo 2.</br>
-<b>Pa</b> - peso da água corridigo.</br>
-</div></br>
-<div class="etapas-procedimento sete">
-  <p style="text-align: left;"><strong>7º Etapa!</strong> Determinar a quantidade de padiolas por m³.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/vas.png); background-repeat: no-repeat; height: 68px; width: 225px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Vas</b> - volume seco do agregado.</br>
-<b>Pas</b> - peso seco do agregado.</br>
-<b>da</b> - massa unitária do agregado.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/vh.png); background-repeat: no-repeat; height: 69px; width: 300px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Vh</b> - volume úmido da areia.</br>
-<b>Vs</b> - volume seco da areia.</br>
-<b>I</b> - inchamento do agregado.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px; width: 300px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>h</b> - altura da padiola.</br>
-<b>L</b> - largura da padiola</br>
-<b>C</b> - comprimento da padiola.</br>
-<b>V</b> - volume do agregado.</br>
-</div></br>
-<div class="etapas-procedimento oito">
-  <p style="text-align: left;"><strong>8º Etapa!</strong> Quantidade de material por saco de cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/pc.png); background-repeat: no-repeat; height: 34px; width: 445px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Pc</b> - peso do saco de cimento.</br>
-<b>Tc</b> - traço do cimento.</br>
-<b>Ta</b> - traço da areia.</br>
-<b>Tb1</b> - traço do agregado graúdo 1.</br>
-<b>Tb2</b> - traço do agregado graúdo 2.</br>
-<b>Tag</b> - traço da água.</br>
-</div></br>
-<div class="etapas-procedimento nove">
-  <p style="text-align: left;"><strong>9º Etapa!</strong> Determinar a quantidade de padiolas por saco de cimento.</p>
-</div>
-<div class="eq" style="background-image: url(img/eq/va.png); background-repeat: no-repeat; height: 68px; width: 157px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>Va</b> - volume do agregado.</br>
-<b>Mas</b> - massa do agregado seco.</br>
-<b>δa</b> - massa unitária do agregado.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>W</b> - úmidade do agregado miúdo.</br>
-<b>Ph</b> - peso úmido do agregado miúdo.</br>
-<b>Ps</b> - peso do agregado miúdo seco.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/i.png); background-repeat: no-repeat; height: 70px; width: 244px"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>I</b> - inchamento do agregado miúdo.</br>
-<b>Vah</b> - volume do agregado miúdo úmido.</br>
-<b>Vs</b> - volume do agregado miúdo seco.</br>
-</div>
-<div class="eq" style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
-<div class="onde" style="width: 340px;">
-Onde:</br>
-<b>h</b> - altura da padiola.</br>
-<b>L</b> - largura da padiola.</br>
-<b>C</b> - comprimento da padiola.</br>
-<b>V</b> - volume do agregado.</br>
-</div>
-</div>
-</div>
+                    <input name="tabelasexpcccccc" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc2" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc3" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc4" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc5" value="" class="pag tabelaform2" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc6" value="" class="pag tabelaform3" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc7" value="" class="pag tabelaform4" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc8" value="" class="pag tabelaform1" readonly> <!-- A --> <input
+                        name="tabelasexpcccccc9" value="" class="pag tabelaform3" readonly></br>
 
-<!-- INFO -->
-<div id="info" class="modalDialog info-box">
-<div>
-<a href="#close" title="Fechar" class="close-dosagem">×</a>
-<div class="a-info">
-<h6><b>Sistema em forma de web site totalmente dinâmico com funções
-específicas para a área do Curso do Técnico em Edificações, sendo um sistema de simples acesso ao
-usuário, que com tais características tem como objetivo principal a facilidade de realizar suas funções com
-sua metodologia que propõe fornecer os cálculos da determinação da composição granulométrica e os
-métodos de dosagem de concreto, de forma bem explicita e didática para que o usuário tenha total noção
-do que está sendo realizado pelo sistema.</b></h6></div>
-</div>
-</div>
+                    <input type="button" onclick="tabelaexp()" value="Calcular" class="calcular">
+                </form>
+            </div>
+        </div>
+
+        <div id="procedimentosemp" class="modalDialog procedimentos-emp">
+            <div>
+                <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                <a href="#empirico" title="Voltar ao método empírico" class="passos">Método Empírico <i
+                        class="fas fa-check-circle"></i></a>
+                <h6><b>A metodologia empírica foi desenvolvida com base na dosagem ABCP.</b></h6>
+                <div class="etapas doze">
+                    <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo
+                        divulgar os
+                        passos realizados para calcular o Método Empírico.</p>
+                </div>
+                </br>
+                <div class="etapas-procedimento">
+                    <p style="text-align: left;"><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do
+                        gráfico de
+                        relação água/cimento.</p>
+                </div>
+                <div class="eq"></div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>fc28</b> - resistência do concreto aos 28 dias.</br>
+                    <b>fck</b> - resistência à compressão do concreto.</br>
+                    <b>sd</b> - sedimento do concreto.</br>
+                </div></br>
+                <div class="etapas-procedimento dois">
+                    <p style="text-align: left;"><strong>2º Etapa!</strong> Determinar a quantidade de água por meio da
+                        relação
+                        água/cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/pag.png); background-repeat: no-repeat; height: 68px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>a/c</b> - relação água/cimento encontrada no gráfico.</br>
+                    <b>Pag</b> - peso da água.</br>
+                    <b>Pc</b> - peso do saco de cimento (adota-se 50kg).</br>
+                </div></br>
+                <div class="etapas-procedimento tres">
+                    <p style="text-align: left;"><strong>3º Etapa!</strong> Determinar a quantidade total dos agregados.
+                    </p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/a.png); background-repeat: no-repeat; height: 71px;"></div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>A%</b> - relação água/materiais secos.</br>
+                    <b>Pag</b> - peso da água.</br>
+                    <b>Pc</b> - peso do saco de cimento (adota-se 50kg).</br>
+                    <b>Pm</b> - peso de agregados (miúdo e graúdo).</br>
+                </div></br>
+                <div class="etapas-procedimento quatro">
+                    <p style="text-align: left;"><strong>4º Etapa!</strong> Determinar a quantidade de areia e brita.
+                    </p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/pm.png); background-repeat: no-repeat; height: 31px;"></div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pm</b> - peso de agregados (miúdo e graúdo).</br>
+                    <b>Porc. agregado</b> - porcentagem dos agregados (miúdo e graúdo).</br>
+                </div></br>
+                <div class="etapas-procedimento cinco">
+                    <p style="text-align: left;"><strong>5º Etapa!</strong> Determinar o traço por kg de cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/traco.png); background-repeat: no-repeat; height: 69px; width: 407px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pc</b> - peso do saco de cimento.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                    <b>Mb1</b> - peso do agregado graúdo 1.</br>
+                    <b>Mb2</b> - peso do agregado graúdo 2.</br>
+                    <b>Pag</b> - peso da água.</br>
+                </div></br>
+                <div class="etapas-procedimento seis">
+                    <p style="text-align: left;"><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>W</b> - umidade do agregado miúdo.</br>
+                    <b>Ph</b> - peso úmido do agregado miúdo.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/pa.png); background-repeat: no-repeat; height: 31px; width: 309px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pa</b> - peso da água corrigido.</br>
+                    <b>Ph</b> - peso do agregado miúdo úmido.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                    <b>Pag</b> - peso da água.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/tracoc.png); background-repeat: no-repeat; height: 69px; width: 410px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pc</b> - peso do saco de cimento.</br>
+                    <b>Ph</b> - peso do agregado miúdo úmido.</br>
+                    <b>Mb1</b> - peso do agregado graúdo 1.</br>
+                    <b>Mb2</b> - peso do agregado graúdo 2.</br>
+                    <b>Pa</b> - peso da água corridigo.</br>
+                </div></br>
+                <div class="etapas-procedimento sete">
+                    <p style="text-align: left;"><strong>7º Etapa!</strong> Volume de material por saco de cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/delta.png); background-repeat: no-repeat; height: 69px; width: 96px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>δ</b> - massa unitária do agregado.</br>
+                    <b>M</b> - massa do agregado.</br>
+                    <b>V</b> - volume do agregado.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/inchamento.png); background-repeat: no-repeat; height: 70px; width: 190px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>I</b> - inchamento do agregado miúdo.</br>
+                    <b>Vh</b> - volume do agregado miúdo úmido.</br>
+                    <b>Vs</b> - volume do agregado miúdo seco.</br>
+                </div></br>
+                <div class="etapas-procedimento oito">
+                    <p style="text-align: left;"><strong>8º Etapa!</strong> Determinação das padiolas por saco de
+                        cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>h</b> - altura da padiola.</br>
+                    <b>L</b> - largura da padiola.</br>
+                    <b>C</b> - comprimento da padiola.</br>
+                    <b>V</b> - volume do agregado.</br>
+                </div></br>
+                <div class="etapas-procedimento nove">
+                    <p style="text-align: left;"><strong>9º Etapa!</strong> Quantidade de material por m³.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/c.png); background-repeat: no-repeat; height: 84px; width: 354px">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>C</b> - consumo de cimento.</br>
+                    <b>Dc, Da, Dp</b> - massa específica do cimento, areia e pedra.</br>
+                    <b>a</b> - peso da areia.</br>
+                    <b>p</b> - peso do agregado graúdo.</br>
+                    <b>a/c</b> - relação água/cimento.</br>
+                </div></br>
+                <div class="etapas-procedimento dez">
+                    <p style="text-align: left;"><strong>10º Etapa!</strong> Determinação das padiolas por m³.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/b.png); background-repeat: no-repeat; height: 68px; width: 98px">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>V</b> - volume do agregado.</br>
+                    <b>δ</b> - massa unitária do agregado.</br>
+                    <b>P</b> - peso do agregado.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/i.png); background-repeat: no-repeat; height: 70px; width: 244px">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>I</b> - inchamento do agregado miúdo.</br>
+                    <b>Vah</b> - volume do agregado miúdo úmido.</br>
+                    <b>Vs</b> - volume do agregado miúdo seco.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>h</b> - altura da padiola.</br>
+                    <b>L</b> - largura da padiola.</br>
+                    <b>C</b> - comprimento da padiola.</br>
+                    <b>V</b> - volume do agregado.</br>
+                </div></br>
+            </div>
+        </div>
+
+        <div id="procedimentosexp" class="modalDialog procedimentos-exp">
+            <div>
+                <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                <a href="#experimental" title="Voltar ao método experimental" class="passos">Método Experimental <i
+                        class="fas fa-check-circle"></i></a>
+                <h6><b>A metodologia experimental foi desenvolvida com base na dosagem ABCP.</b></h6>
+                <div class="etapas doze">
+                    <p><strong><i class="fas fa-bullhorn"></i></strong> Esta aba de procedimentos tem como objetivo
+                        divulgar os
+                        passos realizados para calcular o Método Experimental.</p>
+                </div>
+                </br>
+                <div class="etapas-procedimento">
+                    <p style="text-align: left;"><strong>1º Etapa!</strong> Calcular a relação água/cimento por meio do
+                        gráfico de
+                        relação água/cimento.</p>
+                </div>
+                <div class="eq"></div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>fc28</b> - resistência do concreto aos 28 dias.</br>
+                    <b>fck</b> - resistência à compressão do concreto.</br>
+                    <b>sd</b> - sedimento do concreto.</br>
+                </div></br>
+                <div class="etapas-procedimento dois">
+                    <p style="text-align: left;"><strong>2º Etapa!</strong> Calcular a quantidade de água e cimento em
+                        função da
+                        consistência e da dimensão máxima característica do agregado.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/cag.png); background-repeat: no-repeat; height: 77px;">
+                </div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>C</b> - consumo de cimento.</br>
+                    <b>Cag</b> - consumo de água encontrado na tabela (por meio do slumptest).</br>
+                    <b>a/c</b> - relação água/cimento.</br>
+                </div></br>
+                <div class="etapas-procedimento tres">
+                    <p style="text-align: left;"><strong>3º Etapa!</strong> Determinar a quantidade de agregado graúdo
+                        em função
+                        do módulo de finura e da dimensão máxima característica do agregado.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/cb.png); background-repeat: no-repeat; height: 25px;"></div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>Cb</b> - consumo de agregado graúdo.</br>
+                    <b>Vc</b> - volume compactado seco do agregado graúdo (encontrado na tabela por meio do DMC e do
+                    MF).</br>
+                    <b>Mc</b> - massa unitária do agregado graúdo.</br>
+                </div></br>
+                <div class="etapas-procedimento quatro">
+                    <p style="text-align: left;"><strong>4º Etapa!</strong> Determinar a quantidade de areia.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/vm.png); background-repeat: no-repeat; height: 76px; width: 401px;">
+                </div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>Vm</b> - volume da areia.</br>
+                    <b>x</b> - volume do concreto.</br>
+                    <b>Ca</b> - consumo de água.</br>
+                    <b>Cc</b> - consumo de cimento.</br>
+                    <b>Cb</b> - consumo de agregado graúdo.</br>
+                    <b>γa</b> - massa específica da água.</br>
+                    <b>γc</b> - massa específica do cimento.</br>
+                    <b>γb</b> - massa específica do agregado graúdo.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/cm.png); background-repeat: no-repeat; height: 31px; width: 401px;">
+                </div>
+                <div class="onde">
+                    Onde:</br>
+                    <b>Cm</b> - consumo de areia.</br>
+                    <b>γm</b> - massa específica da areia.</br>
+                    <b>Vm</b> - volume da areia.</br>
+                </div></br>
+                <div class="etapas-procedimento cinco">
+                    <p style="text-align: left;"><strong>5º Etapa!</strong> Determinar o traço do cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/traco.png); background-repeat: no-repeat; height: 69px; width: 407px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pc</b> - peso do saco de cimento.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                    <b>Mb1</b> - peso do agregado graúdo 1.</br>
+                    <b>Mb2</b> - peso do agregado graúdo 2.</br>
+                    <b>Pag</b> - peso da água.</br>
+                </div></br>
+                <div class="etapas-procedimento seis">
+                    <p style="text-align: left;"><strong>6º Etapa!</strong> Corrigir o traço por meio da umidade.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>W</b> - umidade do agregado miúdo.</br>
+                    <b>Ph</b> - peso úmido do agregado miúdo.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/pa.png); background-repeat: no-repeat; height: 31px; width: 309px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pa</b> - peso da água corrigido.</br>
+                    <b>Ph</b> - peso do agregado miúdo úmido.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                    <b>Pag</b> - peso da água.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/tracoc.png); background-repeat: no-repeat; height: 69px; width: 410px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pc</b> - peso do saco de cimento.</br>
+                    <b>Ph</b> - peso do agregado miúdo úmido.</br>
+                    <b>Mb1</b> - peso do agregado graúdo 1.</br>
+                    <b>Mb2</b> - peso do agregado graúdo 2.</br>
+                    <b>Pa</b> - peso da água corridigo.</br>
+                </div></br>
+                <div class="etapas-procedimento sete">
+                    <p style="text-align: left;"><strong>7º Etapa!</strong> Determinar a quantidade de padiolas por m³.
+                    </p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/vas.png); background-repeat: no-repeat; height: 68px; width: 225px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Vas</b> - volume seco do agregado.</br>
+                    <b>Pas</b> - peso seco do agregado.</br>
+                    <b>da</b> - massa unitária do agregado.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/vh.png); background-repeat: no-repeat; height: 69px; width: 300px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Vh</b> - volume úmido da areia.</br>
+                    <b>Vs</b> - volume seco da areia.</br>
+                    <b>I</b> - inchamento do agregado.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px; width: 300px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>h</b> - altura da padiola.</br>
+                    <b>L</b> - largura da padiola</br>
+                    <b>C</b> - comprimento da padiola.</br>
+                    <b>V</b> - volume do agregado.</br>
+                </div></br>
+                <div class="etapas-procedimento oito">
+                    <p style="text-align: left;"><strong>8º Etapa!</strong> Quantidade de material por saco de cimento.
+                    </p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/pc.png); background-repeat: no-repeat; height: 34px; width: 445px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Pc</b> - peso do saco de cimento.</br>
+                    <b>Tc</b> - traço do cimento.</br>
+                    <b>Ta</b> - traço da areia.</br>
+                    <b>Tb1</b> - traço do agregado graúdo 1.</br>
+                    <b>Tb2</b> - traço do agregado graúdo 2.</br>
+                    <b>Tag</b> - traço da água.</br>
+                </div></br>
+                <div class="etapas-procedimento nove">
+                    <p style="text-align: left;"><strong>9º Etapa!</strong> Determinar a quantidade de padiolas por saco
+                        de
+                        cimento.</p>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/va.png); background-repeat: no-repeat; height: 68px; width: 157px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>Va</b> - volume do agregado.</br>
+                    <b>Mas</b> - massa do agregado seco.</br>
+                    <b>δa</b> - massa unitária do agregado.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/w.png); background-repeat: no-repeat; height: 70px; width: 225px;">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>W</b> - úmidade do agregado miúdo.</br>
+                    <b>Ph</b> - peso úmido do agregado miúdo.</br>
+                    <b>Ps</b> - peso do agregado miúdo seco.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/i.png); background-repeat: no-repeat; height: 70px; width: 244px">
+                </div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>I</b> - inchamento do agregado miúdo.</br>
+                    <b>Vah</b> - volume do agregado miúdo úmido.</br>
+                    <b>Vs</b> - volume do agregado miúdo seco.</br>
+                </div>
+                <div class="eq"
+                    style="background-image: url(img/eq/h.png); background-repeat: no-repeat; height: 69px;"></div>
+                <div class="onde" style="width: 340px;">
+                    Onde:</br>
+                    <b>h</b> - altura da padiola.</br>
+                    <b>L</b> - largura da padiola.</br>
+                    <b>C</b> - comprimento da padiola.</br>
+                    <b>V</b> - volume do agregado.</br>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO -->
+        <div id="info" class="modalDialog info-box">
+            <div>
+                <a href="#close" title="Fechar" class="close-dosagem">×</a>
+                <div class="a-info">
+                    <h6><b>Sistema em forma de web site totalmente dinâmico com funções
+                            específicas para a área do Curso do Técnico em Edificações, sendo um sistema de simples
+                            acesso ao
+                            usuário, que com tais características tem como objetivo principal a facilidade de realizar
+                            suas funções
+                            com
+                            sua metodologia que propõe fornecer os cálculos da determinação da composição granulométrica
+                            e os
+                            métodos de dosagem de concreto, de forma bem explicita e didática para que o usuário tenha
+                            total noção
+                            do que está sendo realizado pelo sistema.</b></h6>
+                </div>
+            </div>
+        </div>
 </body>
+
 </html>
